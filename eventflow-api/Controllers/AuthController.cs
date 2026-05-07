@@ -1,6 +1,7 @@
 using System.Runtime.ExceptionServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Eventflow.DTOs;
 
 [ApiController]
 

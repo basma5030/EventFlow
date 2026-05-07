@@ -18,7 +18,7 @@ public class AdminService
     {
         return await _db.Users
         .Where(u => u.Role == UserRole.Organizer)
-        .OrderBy(U => U.isapproved)
+        .OrderBy(U => U.IsApproved)
         .ThenBy(u => u.CreatedAt)
         .Select(u => new UserDto
         {
@@ -26,7 +26,7 @@ public class AdminService
             Username = u.Name,
             Email = u.Email,
             Role = u.Role.ToString(),
-            IsApproved = u.isapproved
+            IsApproved = u.IsApproved
         })
         .ToListAsync();
     }
@@ -37,11 +37,11 @@ public class AdminService
         && u.Role == UserRole.Organizer) ??
         throw new Exception("Organizer account not found");
 
-        if(user.isapproved)
+        if(user.IsApproved)
         {
             throw new Exception("This account is already approved.");
         }
-        user.isapproved = true;
+        user.IsApproved = true;
         await _db.SaveChangesAsync();
 
         //Notify orgs
@@ -68,7 +68,7 @@ public class AdminService
     public async Task<List<EventDto>> GetPendingEventsAsync()
     {
         return await _db.Events
-        .Include(e => e.organizerName)
+       // .Include(e => e.organizerName)
         .Where(e => e.status == EventStatus.pending)
         .OrderBy(e => e.createdAt)
         .Select(e => MapEventToDto(e))
@@ -77,7 +77,7 @@ public class AdminService
     public async Task ApproveEventAsync(int eventId)
     {
         var ev = await _db.Events
-        .Include(e => e.organizerName)
+        //.Include(e => e.organizerName)
         .FirstOrDefaultAsync(e => e.id == eventId && e.status == EventStatus.pending)
         ?? throw new Exception("Pending event not found");
 
@@ -87,7 +87,7 @@ public class AdminService
     public async Task RejectEventAsync(int eventId, string reason)
     {
          var ev = await _db.Events
-        .Include(e => e.organizerName)
+        //.Include(e => e.organizerName)
         .FirstOrDefaultAsync(e => e.id == eventId && e.status == EventStatus.pending)
         ?? throw new Exception("Pending event not found");
 
@@ -99,7 +99,7 @@ public class AdminService
     private static EventDto MapEventToDto(Events e) => new()
     {
         id = e.id,
-        organizerName    = e.organizerName,
+      //  organizerName    = e.organizerName,
         title            = e.title,
         description      = e.description,
         venue            = e.venue,
@@ -108,8 +108,8 @@ public class AdminService
         ticketPrice      = e.ticketPrice,
         totalTickets     = e.totalTickets,
         availableTickets = e.availableTickets,
-        imageUrl        = e.imageUrl,
-        attachmentUrl   = e.attachmentUrl,
+        imageUrl        = e.ImagePath,
+        attachmentUrl   = e.AttachmentPath,
         status           = e.status.ToString(),
         rejectionReason  = e.rejectionReason
     };

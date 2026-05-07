@@ -9,7 +9,7 @@ namespace Eventflow.Models
         public string PasswordHash { get; set; } = null!;
         public UserRole Role { get; set; } = UserRole.Participant;
         public DateTime CreatedAt { get; set;}
-        public bool isapproved { get; set; }
+        public bool IsApproved { get; set; }
     }
     
 }

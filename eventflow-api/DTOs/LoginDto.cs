@@ -1,7 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 
-public class LoginDto
+namespace Eventflow.DTOs
 {
-    [Required, EmailAddress] public string email { get; set; }
-    [Required] public string password { get; set; }
+    public class LoginDto
+    {
+        [Required]
+        public string email { get; set; }
+
+        [Required]
+        public string password { get; set; }
+    }
 }

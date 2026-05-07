@@ -1,9 +1,14 @@
+using Eventflow;
 using Eventflow.Data;
+using Eventflow.DTOs;
 using Eventflow.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text.Json.Serialization;
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,11 +70,13 @@ var app = builder.Build();
 //middleware for global exception handling, we will create a custom middleware class for this later
 //app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors("ReactApp");
+
+app.UseRouting(); //  was missing
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
-//for real time feautures
-app.MapHub<EventFlowHub>("/hubs/eventflow");
 
 /* Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -92,4 +99,5 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 */
+app.UseDeveloperExceptionPage();
 app.Run();

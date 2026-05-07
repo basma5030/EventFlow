@@ -3,7 +3,7 @@ using Eventflow.Models;
 using Eventflow.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+namespace Eventflow.DTOs;
 public class AuthService
 {
     private readonly AppDbContext _db;
@@ -24,7 +24,7 @@ public class AuthService
             Email = dto.email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.password),
             Role = dto.role,
-            isapproved = dto.role == UserRole.Participant,
+            IsApproved = dto.role == UserRole.Participant,
             CreatedAt = DateTime.UtcNow
         };
         _db.Users.Add(user);
@@ -43,7 +43,7 @@ public class AuthService
         throw new Exception("Invalid credentials.");
 
         if(user.Role == UserRole.Organizer &&
-        !user.isapproved)
+        !user.IsApproved)
             throw new Exception("Your account is pending admin approval");
 
         return _jwt.GenerateToken(user);
@@ -63,7 +63,7 @@ public class AuthService
             Username = user.Name,
             Email = user.Email,
             Role = user.Role.ToString(),
-            IsApproved = user.isapproved,
+            IsApproved = user.IsApproved,
         };
     }
 }
