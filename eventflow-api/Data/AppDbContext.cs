@@ -27,28 +27,6 @@ namespace Eventflow.Data
                 .Property(u => u.Role)
                 .HasConversion<string>();
 
-            modelBuilder.Entity<Watchlist>()
-                .HasIndex(w => new { w.UserId, w.EventId })
-                .IsUnique();
-
-            modelBuilder.Entity<Watchlist>()
-                .HasOne(w => w.User)
-                .WithMany()
-                .HasForeignKey(w => w.UserId);
-
-            modelBuilder.Entity<Watchlist>()
-                .HasOne(w => w.Event)
-                .WithMany()
-                .HasForeignKey(w => w.EventId);
-
-            modelBuilder.Entity<Review>()
-                .HasIndex(r => new { r.UserId, r.EventId })
-                .IsUnique();
-
-            modelBuilder.Entity<Ticket>()
-                .Property(t => t.PricePaid)
-                .HasPrecision(10, 2);
-
             modelBuilder.Entity<Events>()
                 .Property(e => e.ticketPrice)
                 .HasPrecision(10, 2);
@@ -58,9 +36,16 @@ namespace Eventflow.Data
                 .HasConversion<string>();
 
             modelBuilder.Entity<Ticket>()
-                .HasOne(t => t.Events)
-                .WithMany()
-                .HasForeignKey(t => t.EventId);
+                .Property(t => t.PricePaid)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Watchlist>()
+                .HasIndex(w => new { w.UserId, w.EventId })
+                .IsUnique();
+
+            modelBuilder.Entity<Review>()
+                .HasIndex(r => new { r.UserId, r.EventId })
+                .IsUnique();
         }
     }
 }

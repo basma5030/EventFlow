@@ -11,5 +11,9 @@ namespace Eventflow.Models
         public Events Event { get; set; }
 
         public DateTime savedAt { get; set; }
+
+        //nav properties
+        public User savedBy { get; set; }
+        public Events savedEvent { get; set; }
     }
 }

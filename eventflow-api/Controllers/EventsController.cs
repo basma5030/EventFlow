@@ -1,4 +1,3 @@
-using Eventflow.Data;
 using Eventflow.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,35 +6,73 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/events")]
 public class EventController : ControllerBase
 {
-    private readonly AppDbContext _db;
+    private readonly EventService _service;
 
-    public EventController(AppDbContext db)
+    public EventController(EventService service)
     {
-        _db = db;
+        _service = service;
     }
 
-    // CREATE EVENT (Organizer only)
     [HttpPost]
     [Authorize(Roles = "Organizer")]
-    public async Task<IActionResult> CreateEvent(Events ev)
+    public async Task<IActionResult> CreateEvent(CreateEventDto dto)
     {
-        ev.createdAt = DateTime.UtcNow;
-        ev.status = Eventflow.Models.Enums.EventStatus.pending;
+        var uid = JwtHelper.GetUserId(User);
 
-        _db.Events.Add(ev);
-        await _db.SaveChangesAsync();
+        var result = await _service.CreateEventAsync(uid, dto);
 
-        return Ok(ev);
+        return Ok(result);
     }
 
-    // GET ALL APPROVED EVENTS (for participants)
-    [HttpGet]
-    public IActionResult GetApprovedEvents()
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Organizer")]
+    public async Task<IActionResult> UpdateEvent(int id, CreateEventDto dto)
     {
-        var events = _db.Events
-            .Where(e => e.status == Eventflow.Models.Enums.EventStatus.approved)
-            .ToList();
+        var userId = JwtHelper.GetUserId(User);
 
+        var result = await _service.UpdateEventAsync(id, userId, dto);
+
+        return Ok(result);
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Organizer")]
+    public async Task<IActionResult> DeleteEvent(int id)
+    {
+        var userId = JwtHelper.GetUserId(User);
+
+        await _service.DeleteEventAsync(id, userId);
+
+        return Ok(new { message = "Deleted" });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetApprovedEvents()
+    {
+        var data = await _service.GetApprovedEventsAsync();
+
+        return Ok(data);
+    }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> SearchEvents(
+        [FromQuery] string? venue,
+        [FromQuery] string? category,
+        [FromQuery] DateTime? date)
+    {
+        var data = await _service.SearchEventsAsync(
+            venue,
+            category,
+            date);
+
+        return Ok(data);
+    }
+     [HttpGet("my")]
+    [Authorize(Roles = "Organizer")]
+    public async Task<IActionResult> MyEvents()
+    {
+        var uid    = JwtHelper.GetUserId(User);
+        var events = await _service.getOrganizerEventsAsync(uid);
         return Ok(events);
     }
 }

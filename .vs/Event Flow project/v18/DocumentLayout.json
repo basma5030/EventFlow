@@ -3,36 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Dell\\source\\repos\\Event-flow\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\watchlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\watchlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\migrations\\20260506225454_addnotifications.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\migrations\\20260506225454_addnotifications.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\controllers\\watchlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\controllers\\watchlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\enums\\eventstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\enums\\eventstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\events.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\events.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\services\\ticketservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -43,24 +39,72 @@
       "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Migrations\\20260506225454_AddNotifications.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:eventflow-api\\Migrations\\20260506225454_AddNotifications.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\eventflow-api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\eventflow-api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\services\\notificitationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\services\\notificitationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\hubs\\eventflowhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\hubs\\eventflowhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\services\\reviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\services\\reviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\dtos\\reviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\dtos\\reviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\dtos\\notificationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\dtos\\notificationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\enums\\eventstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\enums\\eventstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\dtos\\eventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\dtos\\eventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\watchlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\watchlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\eventflow-api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\eventflow-api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\controllers\\ticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -75,28 +119,8 @@
       "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\events.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\events.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\dtos\\eventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\dtos\\eventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\enums\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\enums\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -105,10 +129,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -121,6 +141,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\helpers\\futuredateattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\helpers\\futuredateattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|c:\\users\\dell\\source\\repos\\event-flow\\eventflow-api\\migrations\\20260506225454_addnotifications.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E5F4244-B353-88C8-FAE8-7644BB7B35DE}|eventflow-api\\eventflow-api.csproj|solutionrelative:eventflow-api\\migrations\\20260506225454_addnotifications.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -146,78 +170,104 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "EventStatus.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Enums\\EventStatus.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Models\\Enums\\EventStatus.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Enums\\EventStatus.cs",
-              "RelativeToolTip": "eventflow-api\\Models\\Enums\\EventStatus.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "AppDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Migrations\\AppDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Migrations\\AppDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Migrations\\AppDbContextModelSnapshot.cs",
+              "RelativeToolTip": "eventflow-api\\Migrations\\AppDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T14:38:33.699Z",
+              "WhenOpened": "2026-05-07T18:13:16.455Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "20260506225454_AddNotifications.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Migrations\\20260506225454_AddNotifications.Designer.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Migrations\\20260506225454_AddNotifications.Designer.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Migrations\\20260506225454_AddNotifications.Designer.cs",
+              "RelativeToolTip": "eventflow-api\\Migrations\\20260506225454_AddNotifications.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T18:13:12.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\User.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\User.cs",
+              "RelativeToolTip": "eventflow-api\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T14:34:02.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TicketService.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\TicketService.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Services\\TicketService.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\TicketService.cs",
+              "RelativeToolTip": "eventflow-api\\Services\\TicketService.cs",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAQwIIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T14:40:48.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Data\\AppDbContext.cs",
               "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Data\\AppDbContext.cs",
               "RelativeToolTip": "eventflow-api\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAcwEEAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAUwDIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-06T18:21:27.546Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ReviewsController.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\ReviewsController.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Controllers\\ReviewsController.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\ReviewsController.cs",
-              "RelativeToolTip": "eventflow-api\\Controllers\\ReviewsController.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAIwEYAAAABAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\AuthService.cs",
+              "RelativeToolTip": "eventflow-api\\Services\\AuthService.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAQwEQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T14:39:31.952Z",
+              "WhenOpened": "2026-05-06T14:29:04.921Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Events.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Events.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Models\\Events.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Events.cs",
+              "RelativeToolTip": "eventflow-api\\Models\\Events.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA0wBsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T18:59:02.664Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Watchlist.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Watchlist.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Models\\Watchlist.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Watchlist.cs",
-              "RelativeToolTip": "eventflow-api\\Models\\Watchlist.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T14:39:20.139Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NotificationController.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\NotificationController.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Controllers\\NotificationController.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\NotificationController.cs",
-              "RelativeToolTip": "eventflow-api\\Controllers\\NotificationController.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAQwFcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T23:54:54.37Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "WatchlistController.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\WatchlistController.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Controllers\\WatchlistController.cs",
               "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\WatchlistController.cs",
               "RelativeToolTip": "eventflow-api\\Controllers\\WatchlistController.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAUwFAAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-07T00:06:53.358Z",
               "EditorCaption": ""
@@ -225,45 +275,226 @@
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "Ticket.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Ticket.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Models\\Ticket.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Ticket.cs",
+              "RelativeToolTip": "eventflow-api\\Models\\Ticket.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T18:28:35.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "Review.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Review.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Models\\Review.cs",
               "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Review.cs",
               "RelativeToolTip": "eventflow-api\\Models\\Review.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-06T23:59:14.827Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
+              "Title": "NotificitationService.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\NotificitationService.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Services\\NotificitationService.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\NotificitationService.cs",
+              "RelativeToolTip": "eventflow-api\\Services\\NotificitationService.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAUwFEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T22:39:14.545Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Program.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Program.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Program.cs",
+              "RelativeToolTip": "eventflow-api\\Program.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAACsAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T15:14:57.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "NotificationController.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\NotificationController.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Controllers\\NotificationController.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\NotificationController.cs",
+              "RelativeToolTip": "eventflow-api\\Controllers\\NotificationController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAQwD0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T23:54:54.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ReviewsController.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\ReviewsController.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Controllers\\ReviewsController.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\ReviewsController.cs",
+              "RelativeToolTip": "eventflow-api\\Controllers\\ReviewsController.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAUwDEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T14:39:31.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "EventFlowHub.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Hubs\\EventFlowHub.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Hubs\\EventFlowHub.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Hubs\\EventFlowHub.cs",
+              "RelativeToolTip": "eventflow-api\\Hubs\\EventFlowHub.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T17:15:57.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "EventsController.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\EventsController.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Controllers\\EventsController.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\EventsController.cs",
+              "RelativeToolTip": "eventflow-api\\Controllers\\EventsController.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAUwDoAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T14:39:29.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ReviewDto.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\DTOs\\ReviewDto.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\DTOs\\ReviewDto.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\DTOs\\ReviewDto.cs",
+              "RelativeToolTip": "eventflow-api\\DTOs\\ReviewDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T16:53:26.68Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ReviewService.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\ReviewService.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Services\\ReviewService.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\ReviewService.cs",
+              "RelativeToolTip": "eventflow-api\\Services\\ReviewService.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAUwEsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T16:56:05.824Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "NotificationDto.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\DTOs\\NotificationDto.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\DTOs\\NotificationDto.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\DTOs\\NotificationDto.cs",
+              "RelativeToolTip": "eventflow-api\\DTOs\\NotificationDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T12:43:30.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "EventService.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\EventService.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Services\\EventService.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\EventService.cs",
+              "RelativeToolTip": "eventflow-api\\Services\\EventService.cs",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAYwIQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T20:15:09.211Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "EventStatus.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Enums\\EventStatus.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Models\\Enums\\EventStatus.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Enums\\EventStatus.cs",
+              "RelativeToolTip": "eventflow-api\\Models\\Enums\\EventStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T14:38:33.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AdminService.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\AdminService.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Services\\AdminService.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\AdminService.cs",
+              "RelativeToolTip": "eventflow-api\\Services\\AdminService.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAAAGcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T14:26:03.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "EventDto.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\DTOs\\EventDto.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\DTOs\\EventDto.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\DTOs\\EventDto.cs",
+              "RelativeToolTip": "eventflow-api\\DTOs\\EventDto.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAUwBMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T20:16:52.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "Notification.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Notification.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Models\\Notification.cs",
               "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Notification.cs",
               "RelativeToolTip": "eventflow-api\\Models\\Notification.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAiwAsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-06T22:38:21.463Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\AuthService.cs",
-              "RelativeToolTip": "eventflow-api\\Services\\AuthService.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAIwCQAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 24,
+              "Title": "Watchlist.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Watchlist.cs",
+              "RelativeDocumentMoniker": "eventflow-api\\Models\\Watchlist.cs",
+              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Watchlist.cs",
+              "RelativeToolTip": "eventflow-api\\Models\\Watchlist.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T14:29:04.921Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-06T14:39:20.139Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 35,
               "Title": "20260506225454_AddNotifications.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Migrations\\20260506225454_AddNotifications.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Migrations\\20260506225454_AddNotifications.cs",
@@ -271,24 +502,11 @@
               "RelativeToolTip": "eventflow-api\\Migrations\\20260506225454_AddNotifications.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T22:54:55.083Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-06T22:54:55.083Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Ticket.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Ticket.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Models\\Ticket.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Ticket.cs",
-              "RelativeToolTip": "eventflow-api\\Models\\Ticket.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAA4wA8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T18:28:35.619Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 26,
               "Title": "TicketController.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\TicketController.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Controllers\\TicketController.cs",
@@ -300,45 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "TicketService.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\TicketService.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Services\\TicketService.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\TicketService.cs",
-              "RelativeToolTip": "eventflow-api\\Services\\TicketService.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAEwCQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T14:40:48.612Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AdminService.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\AdminService.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Services\\AdminService.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\AdminService.cs",
-              "RelativeToolTip": "eventflow-api\\Services\\AdminService.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAACUAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T14:26:03.154Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "NotificitationService.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\NotificitationService.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Services\\NotificitationService.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\NotificitationService.cs",
-              "RelativeToolTip": "eventflow-api\\Services\\NotificitationService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T22:39:14.545Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 25,
               "Title": "eventflow-api.csproj",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\eventflow-api.csproj",
               "RelativeDocumentMoniker": "eventflow-api\\eventflow-api.csproj",
@@ -346,12 +526,11 @@
               "RelativeToolTip": "eventflow-api\\eventflow-api.csproj",
               "ViewState": "AgIAAA4AAAAAAAAAAAAewBgAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-06T22:48:54.545Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-06T22:48:54.545Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 27,
               "Title": "TicketDto.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\DTOs\\TicketDto.cs",
               "RelativeDocumentMoniker": "eventflow-api\\DTOs\\TicketDto.cs",
@@ -363,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 28,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Controllers\\AdminController.cs",
@@ -375,43 +554,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Events.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Events.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Models\\Events.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Events.cs",
-              "RelativeToolTip": "eventflow-api\\Models\\Events.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABUAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T18:59:02.664Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Program.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Program.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Program.cs",
-              "RelativeToolTip": "eventflow-api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T15:14:57.048Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "EventsController.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\EventsController.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Controllers\\EventsController.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\EventsController.cs",
-              "RelativeToolTip": "eventflow-api\\Controllers\\EventsController.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAYwBkAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T14:39:29.914Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 29,
               "Title": "UserRole.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\Enums\\UserRole.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Models\\Enums\\UserRole.cs",
@@ -423,31 +566,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "EventService.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\EventService.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Services\\EventService.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Services\\EventService.cs",
-              "RelativeToolTip": "eventflow-api\\Services\\EventService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T20:15:09.211Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "EventDto.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\DTOs\\EventDto.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\DTOs\\EventDto.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\DTOs\\EventDto.cs",
-              "RelativeToolTip": "eventflow-api\\DTOs\\EventDto.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA2wBEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T20:16:52.135Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 30,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Controllers\\AuthController.cs",
@@ -459,7 +578,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 31,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\DTOs\\LoginDto.cs",
               "RelativeDocumentMoniker": "eventflow-api\\DTOs\\LoginDto.cs",
@@ -471,19 +590,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\User.cs",
-              "RelativeDocumentMoniker": "eventflow-api\\Models\\User.cs",
-              "ToolTip": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Models\\User.cs",
-              "RelativeToolTip": "eventflow-api\\Models\\User.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAkwAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T14:34:02.095Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 32,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\appsettings.json",
               "RelativeDocumentMoniker": "eventflow-api\\appsettings.json",
@@ -495,7 +602,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 34,
               "Title": "FutureDateAttribute.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Helpers\\FutureDateAttribute.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Helpers\\FutureDateAttribute.cs",
@@ -507,7 +614,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 33,
               "Title": "QrCodeHelper.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\source\\repos\\Event-flow\\eventflow-api\\Helpers\\QrCodeHelper.cs",
               "RelativeDocumentMoniker": "eventflow-api\\Helpers\\QrCodeHelper.cs",

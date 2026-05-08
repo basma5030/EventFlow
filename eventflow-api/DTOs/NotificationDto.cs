@@ -1,16 +1,11 @@
-namespace Eventflow.Models
+﻿namespace Eventflow.DTOs
 {
-    public class Notification
+    public class NotificationDto
     {
         public int Id { get; set; }
         public int EventId { get; set; }
-        public int UserId { get; set; }
         public string Message { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
         public bool IsRead { get; set; }
-        //nav properties
-        //nav
-        public User Recipient { get; set; }
-        public Events RelatedEvent { get; set; }
     }
 }

@@ -28,7 +28,7 @@ public class JwtHelper
         audience: settings["Audience"],
         claims: claims,
         expires: DateTime.UtcNow.AddDays(double
-        .Parse(settings["ExpiresInDays"])),
+        .Parse(settings["ExpiresInDays"] ?? "1")),
         signingCredentials: new SigningCredentials
         (key, SecurityAlgorithms.HmacSha256)
     );

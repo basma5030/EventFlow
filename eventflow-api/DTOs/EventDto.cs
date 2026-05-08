@@ -1,18 +1,21 @@
-
-public class EventDto
+namespace Eventflow.DTOs
 {
-    public int id {get; set;}
-    public string organizerName{get; set;}
-   public string title {get; set;}
-    public string description {get; set;}
-    public string venue {get; set;}
-    public string category {get; set;}
-    public DateTime eventDate {get; set;}
-    public double ticketPrice {get; set;}
-    public int totalTickets {get; set;}
-    public int availableTickets {get; set;}
-    public string imageUrl {get; set;}
-    public string attachmentUrl {get; set;}
-    public string status {get; set;}
-    public string rejectionReason {get; set;}
+    public class EventDto
+    {
+        public int id { get; set; }
+        public string organizerName { get; set; } = null!;
+        public string title { get; set; } = null!;
+        public string description { get; set; } = null!;
+        public string venue { get; set; } = null!;
+        public string category { get; set; } = null!;
+        public DateTime eventDate { get; set; }
+        public double ticketPrice { get; set; }
+        public int totalTickets { get; set; }
+        public int availableTickets { get; set; }
+        public string imageUrl { get; set; } = null!;
+        public string attachmentUrl { get; set; } = null!;
+        public string status { get; set; } = null!;
+        public string rejectionReason { get; set; } = null!;
+         public DateTime createdAt {get; set;}
+    }
 }

@@ -36,7 +36,7 @@ public class TicketService
             if (existingTicket)
                 throw new Exception("You have already purchased a ticket for this event.");
 
-            // 🎟 Create Ticket
+            // Create Ticket QR
             var uniqueCode = Guid.NewGuid().ToString();
             var qrBase64 = _qr.GenerateQrCode(uniqueCode);
 
@@ -51,11 +51,9 @@ public class TicketService
             };
 
             _db.Tickets.Add(ticket);
-
-            // 📉 update event capacity
             ev.availableTickets--;
 
-            // 🔔 create notification (same transaction)
+            // create notification (same transaction)
             var notification = new Notification
             {
                 UserId = userId,
@@ -67,12 +65,11 @@ public class TicketService
 
             _db.Notifications.Add(notification);
 
-            // 💾 single save (IMPORTANT)
+            // single save
             await _db.SaveChangesAsync();
-
             await transaction.CommitAsync();
 
-            // 🔵 SignalR (after commit)
+            //Broadcast updated count to everyone watching this event
             await _hub.Clients
                 .Group($"event-{eventId}")
                 .SendAsync("TicketCountUpdated", new
@@ -110,7 +107,8 @@ public class TicketService
     {
         var ticket = await _db.Tickets
             .Include(t => t.Events)
-            .FirstOrDefaultAsync(t => t.Id == ticketId && t.UserId == userId)
+            .FirstOrDefaultAsync(t => t.Id == ticketId 
+            && t.UserId == userId)
             ?? throw new Exception("Ticket not found.");
 
         return await MapToDto(ticket, ticket.Events);

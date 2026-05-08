@@ -12,18 +12,22 @@ public class AdminController : ControllerBase
     {
         _admin = admin;
     }
+    
+//--------------account management----------------
     [HttpGet("accounts")]
     public async Task<IActionResult> GetAccounts()
     {
         var accounts = await _admin.GetOrganizerAccountsAsync();
         return Ok(accounts);
-    }                   
+    }
+
     [HttpPatch("accounts/{id}/approve")]
     public async Task<IActionResult> ApproveAccount(int id)
     {
         await _admin.ApproveOrganizerAsync(id);
         return Ok(new{ message = "Account approved."});
-    }                
+    }
+
     [HttpDelete("accounts/{id}/reject")]
     public async Task<IActionResult> RejectAccount(int id)
     {

@@ -1,8 +1,9 @@
-namespace Eventflow.Models.Enums;
-
-public enum EventStatus
+namespace Eventflow.Models.Enums
 {
-    pending,
-    approved,
-    rejected
+    public enum EventStatus
+    {
+        pending,
+        approved,
+        rejected
+    }
 }
