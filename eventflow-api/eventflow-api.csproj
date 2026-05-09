@@ -16,7 +16,6 @@
 
 		<PackageReference Include="QRCoder" Version="1.8.0" />
 
-		<!-- ✅ نخليها 9 عشان توافق Pomelo -->
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0" />
 
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.0" />

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Eventflow.Models;
 using Eventflow.Models.Enums;
 using Eventflow.DTOs;
+using Eventflow.Exceptions;
 
 public class WatchlistService
 {
@@ -27,13 +28,13 @@ public class WatchlistService
          && e.status == EventStatus.approved);
         if(!eventExists)
         {
-            throw new Exception("Event not found or not approved yet.");
+            throw new NotFoundException("Event not found or not approved yet.");
         }
         var alreadySaved = await _db.Watchlist.AnyAsync(w => w.UserId == userId
          && w.EventId == eventId);
         if(alreadySaved)
         {
-            throw new Exception("Event is already in the watchlist.");
+            throw new ValidationException("Event is already in the watchlist.");
         }
         _db.Watchlist.Add(new Watchlist
         {
@@ -46,7 +47,8 @@ public class WatchlistService
     public async Task removeFromWatchlistAsync(int userId, int eventId)
     {
         var entry = await _db.Watchlist.FirstOrDefaultAsync(w => w.UserId == userId
-         && w.EventId == eventId) ?? throw new Exception("Event not found in watchlist.");
+         && w.EventId == eventId) ??
+         throw new NotFoundException("Event not found in watchlist.");
         _db.Watchlist.Remove(entry);
         await _db.SaveChangesAsync();
     }  

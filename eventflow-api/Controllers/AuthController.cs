@@ -17,24 +17,45 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto dto)
     {
-        var user = await _auth.RegisterAsync(dto);
-        return Ok(user);
+        try
+        {
+            var user = await _auth.RegisterAsync(dto);
+            return Ok(user);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
 
     [HttpPost("Login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {
-        var token = await _auth.LoginAsync(dto);
-        return Ok( new{token});
+        try
+        {
+            var token = await _auth.LoginAsync(dto);
+            return Ok(new { token });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
     
     [HttpGet("profile")]
     [Authorize]
     public async Task<IActionResult> getProfile()
     {
-        var userId = JwtHelper.GetUserId(User);
-        var user = await _auth.getCurrentUserAsync(userId);
-        return Ok(user);
+        try
+        {
+            var userId = JwtHelper.GetUserId(User);
+            var user = await _auth.getCurrentUserAsync(userId);
+            return Ok(user);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
     [HttpGet("test")]
     public async Task<IActionResult> test()

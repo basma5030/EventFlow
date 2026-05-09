@@ -1,5 +1,6 @@
 using Eventflow.Data;
 using Eventflow.Models;
+using Eventflow.Exceptions;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,7 +36,7 @@ public class NotificationService
         var notification = await _db.Notifications
             .FirstOrDefaultAsync(n => n.Id == id 
             && n.UserId == userId) 
-             ?? throw new Exception("Notification not found.");
+             ?? throw new NotFoundException("Notification not found.");
 
 
         notification.IsRead = true;

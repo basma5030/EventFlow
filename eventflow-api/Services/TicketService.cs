@@ -1,4 +1,5 @@
 using Eventflow.Data;
+using Eventflow.Exceptions;
 using Eventflow.Models;
 using Eventflow.Models.Enums;
 using Microsoft.AspNetCore.SignalR;
@@ -32,7 +33,7 @@ public class TicketService
             if (ev == null)
             {
                 Console.WriteLine("ERROR: Event not found!");
-                throw new Exception("Event not found");
+                throw new NotFoundException("Event not found");
             }
             
             Console.WriteLine($"Event found: {ev.title}, Status: {ev.status}, Available: {ev.availableTickets}");
@@ -40,13 +41,13 @@ public class TicketService
             if (ev.status != EventStatus.approved)
             {
                 Console.WriteLine("ERROR: Event not approved!");
-                throw new Exception("Event is not approved yet");
+                throw new ValidationException("Event is not approved yet");
             }
             
             if (ev.availableTickets <= 0)
             {
                 Console.WriteLine("ERROR: Sold out!");
-                throw new Exception("Sorry! This event is sold out.");
+                throw new ValidationException("Sorry! This event is sold out.");
             }
             
             var existingTicket = await _db.Tickets
@@ -55,7 +56,7 @@ public class TicketService
             if (existingTicket)
             {
                 Console.WriteLine("ERROR: User already has a ticket!");
-                throw new Exception("You have already purchased a ticket for this event.");
+                throw new ValidationException("You have already purchased a ticket for this event.");
             }
             
             var uniqueCode = Guid.NewGuid().ToString();
@@ -92,13 +93,13 @@ public class TicketService
             
             Console.WriteLine("SUCCESS: Ticket purchased!");
             
-            // 9. إرسال إشعار فوري للمستخدم عبر SignalR - using User instead of Group
+            // SignalR - using User instead of Group
             try
             {
                 await _hub.Clients.User(userId.ToString()).SendAsync("ReceiveNotification", new
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Message = $"🎉 You successfully purchased a ticket for {ev.title}!",
+                    Message = $" You successfully purchased a ticket for {ev.title}!",
                     EventId = ev.id,
                     CreatedAt = DateTime.UtcNow,
                     IsRead = false
@@ -110,7 +111,7 @@ public class TicketService
                 Console.WriteLine($"Hub broadcast error (non-critical): {hubEx.Message}");
             }
             
-            // 10. Broadcast تحديث عدد التذاكر للمشاهدين
+            // broadcast no. tickets to event watchers
             try
             {
                 await _hub.Clients.Group($"event-{eventId}").SendAsync("TicketCountUpdated", new
@@ -157,7 +158,7 @@ public class TicketService
         var ticket = await _db.Tickets
             .Include(t => t.Events)
             .FirstOrDefaultAsync(t => t.Id == ticketId && t.UserId == userId)
-            ?? throw new Exception("Ticket not found.");
+            ?? throw new NotFoundException("Ticket not found.");
 
         return await MapToDto(ticket, ticket.Events);
     }

@@ -16,6 +16,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         ServerVersion.AutoDetect(
         builder.Configuration.GetConnectionString("DefaultConnection"))
     ));
+    
+    //temp
+    var cs = builder.Configuration["ConnectionStrings:DefaultConnection"];
+        Console.WriteLine("RAW CS: " + cs);
 
 //Authentication setup
 var jwt = builder.Configuration.GetSection("JwtSettings");
@@ -59,6 +63,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<JwtHelper>();
 
+builder.Services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 builder.Services.AddScoped<AdminService>();
 builder.Services.AddScoped<FileHelper>();
 builder.Services.AddScoped<EventService>();
@@ -97,6 +102,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors("ReactApp");
 app.UseStaticFiles();
 
