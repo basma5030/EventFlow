@@ -13,12 +13,12 @@ public class WatchlistService
     public async Task<List<EventDto>> getWatchListAsync(int userId)
     {
         return await _db.Watchlist
-        .Include(w => w.savedEvent)
+        .Include(w => w.Event)
         .ThenInclude(e => e.Organizer)
         .Where(w => w.UserId == userId 
-        && w.savedEvent.status == EventStatus.approved)
+        && w.Event.status == EventStatus.approved)
         .OrderByDescending(w => w.savedAt)
-        .Select(w => EventService.MapToDto(w.savedEvent))
+        .Select(w => EventService.MapToDto(w.Event))
         .ToListAsync();
     }
     public async Task addToWatchlistAsync(int userId, int eventId)

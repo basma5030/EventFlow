@@ -2,66 +2,68 @@ using Eventflow.Data;
 using Eventflow.DTOs;
 using Eventflow.Models;
 using Eventflow.Models.Enums;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 public class EventService
 {
     private readonly AppDbContext _db;
     private readonly FileHelper _fileHelper;
+    private readonly IWebHostEnvironment _env;
+    private readonly IHubContext<EventFlowHub> _hub;
 
-    public EventService(AppDbContext db, FileHelper fileHelper)
+    public EventService(AppDbContext db, FileHelper fileHelper, IWebHostEnvironment env, IHubContext<EventFlowHub> hub)
     {
         _db = db;
         _fileHelper = fileHelper;
+        _env = env;
+        _hub = hub;
     }
 
-    //Organizer logic: create event, get own events, update event, delete event
-   public async Task<EventDto> CreateEventAsync(
-    int organizerId,
-    CreateEventDto dto)
-{
-    var organizer = await _db.Users
-        .FindAsync(organizerId)
-        ?? throw new Exception(
-            "Organizer not found.");
-
-    if (!organizer.IsApproved)
-        throw new Exception(
-            "Organizer account is not approved.");
-
-    var ev = new Events
+    public async Task<EventDto> CreateEventAsync(int organizerId, CreateEventDto dto)
     {
-        organizerId = organizerId,
-        Organizer = organizer,
-        title = dto.title,
-        description = dto.description,
-        venue = dto.venue,
-        category = dto.category,
-        eventDate = dto.eventDate,
-        ticketPrice = dto.ticketPrice,
-        totalTickets = dto.totalTickets,
-        availableTickets = dto.totalTickets, 
-        status = EventStatus.pending,
-        createdAt = DateTime.UtcNow
-    };
+        var organizer = await _db.Users.FindAsync(organizerId)
+            ?? throw new Exception("Organizer not found.");
 
-    _db.Events.Add(ev);
+        if (!organizer.IsApproved)
+            throw new Exception("Organizer account is not approved.");
 
-    await _db.SaveChangesAsync();
+        var ev = new Events
+        {
+            organizerId = organizerId,
+            Organizer = organizer,
+            title = dto.title,
+            description = dto.description,
+            venue = dto.venue,
+            category = dto.category,
+            eventDate = dto.eventDate,
+            ticketPrice = dto.ticketPrice,
+            totalTickets = dto.totalTickets,
+            availableTickets = dto.totalTickets,
+            status = EventStatus.pending,
+            createdAt = DateTime.UtcNow
+        };
 
-    return MapToDto(ev);
-}
+        _db.Events.Add(ev);
+        await _db.SaveChangesAsync();
+        return MapToDto(ev);
+    }
 
-    public async Task<EventDto> UpdateEventAsync(int eventId,
-     int organizerId, CreateEventDto updated)
+    public async Task<EventDto> UpdateEventAsync(int eventId, int organizerId, CreateEventDto updated)
     {
         var ev = await _db.Events
-        .Include(e => e.Organizer)
-        .FirstOrDefaultAsync(e => e.id == eventId 
-        && e.organizerId == organizerId)
+            .Include(e => e.Organizer)
+            .FirstOrDefaultAsync(e => e.id == eventId && e.organizerId == organizerId)
             ?? throw new Exception("Event not found or access denied.");
 
+        // حفظ القيم القديمة قبل التعديل
+        var oldTitle = ev.title;
+        var oldDate = ev.eventDate;
+        var oldVenue = ev.venue;
+        var oldPrice = ev.ticketPrice;
+        var oldCategory = ev.category;
 
+        // التعديلات
         ev.title = updated.title;
         ev.description = updated.description;
         ev.venue = updated.venue;
@@ -69,33 +71,91 @@ public class EventService
         ev.eventDate = updated.eventDate;
         ev.ticketPrice = updated.ticketPrice;
 
-         // only update ticket count if no tickets sold yet
         var ticketsSold = ev.totalTickets - ev.availableTickets;
         if (updated.totalTickets >= ticketsSold)
         {
-            ev.totalTickets     = updated.totalTickets;
+            ev.totalTickets = updated.totalTickets;
             ev.availableTickets = updated.totalTickets - ticketsSold;
         }
         else
         {
             throw new Exception("Total tickets cannot be less than tickets already sold.");
         }
-    //  imageUrl = await SaveFileAsync(updated.image),
-    //  attachmentUrl = await SaveFileAsync(updated.attachment),
 
         await _db.SaveChangesAsync();
+
+        // تجهيز رسالة التعديلات
+        var changes = new List<string>();
+
+        if (oldTitle != updated.title)
+            changes.Add($"title changed from '{oldTitle}' to '{updated.title}'");
+
+        if (oldDate != updated.eventDate)
+            changes.Add($"date changed from '{oldDate:yyyy-MM-dd HH:mm}' to '{updated.eventDate:yyyy-MM-dd HH:mm}'");
+
+        if (oldVenue != updated.venue)
+            changes.Add($"venue changed from '{oldVenue}' to '{updated.venue}'");
+
+        if (oldPrice != updated.ticketPrice)
+            changes.Add($"price changed from '{oldPrice:C}' to '{updated.ticketPrice:C}'");
+
+        if (oldCategory != updated.category)
+            changes.Add($"category changed from '{oldCategory}' to '{updated.category}'");
+
+        if (changes.Count > 0)
+        {
+            var message = $"✏️ Event '{ev.title}' was updated:\n- {string.Join("\n- ", changes)}";
+            await NotifyAttendees(eventId, message);
+        }
+
         return MapToDto(ev);
     }
 
     public async Task DeleteEventAsync(int id, int organizerId)
     {
         var ev = await _db.Events
-            .FirstOrDefaultAsync(e => e.id == id 
-            && e.organizerId == organizerId)
+            .FirstOrDefaultAsync(e => e.id == id && e.organizerId == organizerId)
             ?? throw new Exception("Event not found or access denied.");
 
         _db.Events.Remove(ev);
         await _db.SaveChangesAsync();
+    }
+
+    public async Task<EventDto?> GetEventByIdAsync(int id)
+    {
+        var ev = await _db.Events
+            .Include(e => e.Organizer)
+            .FirstOrDefaultAsync(e => e.id == id);
+
+        if (ev == null)
+            return null;
+
+        return MapToDto(ev);
+    }
+
+    public async Task<EventWithMaterialsDto?> GetEventWithMaterialsAsync(int id)
+    {
+        var ev = await _db.Events
+            .Include(e => e.Organizer)
+            .Include(e => e.Materials)
+            .FirstOrDefaultAsync(e => e.id == id);
+
+        if (ev == null)
+            return null;
+
+        return new EventWithMaterialsDto
+        {
+            Event = MapToDto(ev),
+            Materials = ev.Materials.Select(m => new MaterialDto
+            {
+                Id = m.Id,
+                FilePath = m.FilePath,
+                OriginalName = m.OriginalName,
+                FileSize = m.FileSize,
+                ContentType = m.ContentType,
+                UploadedAt = m.UploadedAt
+            }).ToList()
+        };
     }
 
     public async Task<List<EventDto>> GetApprovedEventsAsync()
@@ -106,39 +166,31 @@ public class EventService
             .Select(e => MapToDto(e))
             .ToListAsync();
     }
-      public async Task<List<EventDto>> getOrganizerEventsAsync(int organizerId)
+
+    public async Task<List<EventDto>> getOrganizerEventsAsync(int organizerId)
     {
         return await _db.Events
-        .Include(e => e.Organizer)
-        .Where(e => e.organizerId == organizerId)
-        .OrderByDescending(e => e.createdAt)
-        .Select(e => MapToDto(e))
-        .ToListAsync();
+            .Include(e => e.Organizer)
+            .Where(e => e.organizerId == organizerId)
+            .OrderByDescending(e => e.createdAt)
+            .Select(e => MapToDto(e))
+            .ToListAsync();
     }
 
-    public async Task<List<EventDto>> SearchEventsAsync(
-        string? venue,
-        string? category,
-        DateTime? date)
+    public async Task<List<EventDto>> SearchEventsAsync(string? venue, string? category, DateTime? date)
     {
         var query = _db.Events
             .Where(e => e.status == EventStatus.approved)
             .AsQueryable();
 
         if (!string.IsNullOrEmpty(venue))
-        {
             query = query.Where(e => e.venue.Contains(venue));
-        }
 
         if (!string.IsNullOrEmpty(category))
-        {
             query = query.Where(e => e.category.Contains(category));
-        }
 
         if (date.HasValue)
-        {
             query = query.Where(e => e.eventDate.Date == date.Value.Date);
-        }
 
         return await query
             .Include(e => e.Organizer)
@@ -146,46 +198,109 @@ public class EventService
             .ToListAsync();
     }
 
-    //saving photos and attachment logic
-   public async Task<EventDto> UploadEventFilesAsync(int organizerId,int eventId,
-    IFormFile image, IFormFile attachment)
-{
-    var ev = await _db.Events
-        .FirstOrDefaultAsync(e =>
-            e.id == eventId &&
-            e.organizerId == organizerId)
-        ?? throw new Exception("Event not found or access denied.");
-
-    // upload files (NO DB here)
-    if (image != null)
-        ev.ImagePath = await _fileHelper
-        .SaveFileAsync(image, eventId);
-
-    if (attachment != null)
-        ev.AttachmentPath = await _fileHelper
-        .SaveFileAsync(attachment, eventId);
-
-    // DB update ONLY here
-    await _db.SaveChangesAsync(); 
-    return MapToDto(ev);
-}
-    //model to dto mapping
-     public static EventDto MapToDto(Events e) => new()
+    public async Task<EventDto> UploadEventFilesAsync(int organizerId, int eventId, IFormFile image, IFormFile attachment)
     {
-        id               = e.id,
-        organizerName    = e.Organizer?.Name ?? "Unknown",
-        title            = e.title,
-        description      = e.description,
-        venue            = e.venue,
-        category         = e.category,
-        eventDate        = e.eventDate,
-        ticketPrice      = e.ticketPrice,
-        totalTickets     = e.totalTickets,
+        var ev = await _db.Events
+            .FirstOrDefaultAsync(e => e.id == eventId && e.organizerId == organizerId)
+            ?? throw new Exception("Event not found or access denied.");
+
+        if (image != null)
+            ev.ImagePath = await _fileHelper.SaveFileAsync(image, eventId);
+
+        if (attachment != null)
+            ev.AttachmentPath = await _fileHelper.SaveFileAsync(attachment, eventId);
+
+        await _db.SaveChangesAsync();
+        return MapToDto(ev);
+    }
+
+    // ========== Upload single material ==========
+    public async Task<EventMaterial> UploadSingleMaterialAsync(int organizerId, int eventId, IFormFile file)
+    {
+        var ev = await _db.Events
+            .FirstOrDefaultAsync(e => e.id == eventId && e.organizerId == organizerId)
+            ?? throw new Exception("Event not found or access denied.");
+
+        var filePath = await _fileHelper.SaveFileAsync(file, eventId);
+
+        var material = new EventMaterial
+        {
+            EventId = eventId,
+            FilePath = filePath,
+            OriginalName = file.FileName,
+            FileSize = file.Length,
+            ContentType = file.ContentType,
+            UploadedAt = DateTime.UtcNow
+        };
+
+        _db.EventMaterials.Add(material);
+        await _db.SaveChangesAsync();
+
+        // إرسال إشعار باسم الحدث
+        await NotifyAttendees(eventId, $"📎 New material '{file.FileName}' was added to event '{ev.title}'");
+
+        return material;
+    }
+
+    // ========== Delete material ==========
+    public async Task DeleteMaterialAsync(int organizerId, int eventId, int materialId)
+    {
+        var material = await _db.EventMaterials
+            .Include(m => m.Event)
+            .FirstOrDefaultAsync(m => m.Id == materialId && m.EventId == eventId);
+        
+        if (material == null)
+            throw new Exception("Material not found");
+        
+        if (material.Event.organizerId != organizerId)
+            throw new Exception("You don't have permission to delete this material");
+        
+        var filePath = Path.Combine(_env.WebRootPath, material.FilePath.TrimStart('/'));
+        if (File.Exists(filePath))
+            File.Delete(filePath);
+        
+        _db.EventMaterials.Remove(material);
+        await _db.SaveChangesAsync();
+    }
+
+    // ========== Helper: Notify all attendees ==========
+    private async Task NotifyAttendees(int eventId, string message)
+    {
+        var attendees = await _db.Tickets
+            .Where(t => t.EventId == eventId)
+            .Select(t => t.UserId)
+            .Distinct()
+            .ToListAsync();
+
+        foreach (var userId in attendees)
+        {
+            await _hub.Clients.Group($"user-{userId}").SendAsync("ReceiveNotification", new
+            {
+                Id = Guid.NewGuid().ToString(),
+                Message = message,
+                EventId = eventId,
+                CreatedAt = DateTime.UtcNow,
+                IsRead = false
+            });
+        }
+    }
+
+    public static EventDto MapToDto(Events e) => new()
+    {
+        id = e.id,
+        organizerName = e.Organizer?.Name ?? "Unknown",
+        title = e.title,
+        description = e.description,
+        venue = e.venue,
+        category = e.category,
+        eventDate = e.eventDate,
+        ticketPrice = e.ticketPrice,
+        totalTickets = e.totalTickets,
         availableTickets = e.availableTickets,
-        imageUrl        = e.ImagePath,
-        attachmentUrl   = e.AttachmentPath,
-        status           = e.status.ToString(),
-        rejectionReason  = e.rejectionReason,
-        createdAt        = e.createdAt
+        imageUrl = e.ImagePath,
+        attachmentUrl = e.AttachmentPath,
+        status = e.status.ToString(),
+        rejectionReason = e.rejectionReason,
+        createdAt = e.createdAt
     };
 }

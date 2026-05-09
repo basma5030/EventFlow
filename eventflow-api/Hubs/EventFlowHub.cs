@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 [Authorize]
 public class EventFlowHub : Hub
 {
-    // Client joins on login, leaves on logout
-    //==========Notifications=========
+    // ========== Notifications ==========
     public override async Task OnConnectedAsync()
     {
         var userId = Context.UserIdentifier;
@@ -15,33 +14,42 @@ public class EventFlowHub : Hub
             await Groups.AddToGroupAsync(
                 Context.ConnectionId,
                 $"user-{userId}");
+            
+            Console.WriteLine($"✅ User {userId} connected and added to group user-{userId}");
         }
 
         await base.OnConnectedAsync();
     }
 
-    //the below methods are for event-specific groups (e.g. for live updates on ticket sales)
-    // Client joins when opening an event detail page
-    // Client leaves when navigating away
-    //=========tickets========
+    // ========== Join user group (called from frontend) ==========
+    public async Task JoinUserGroup(int userId)
+    {
+        await Groups.AddToGroupAsync(Context.ConnectionId, $"user-{userId}");
+        Console.WriteLine($"✅ User {userId} manually joined group user-{userId}");
+    }
 
+    // ========== Event-specific groups ==========
     public async Task JoinEventGroup(int eventId)
     {
-        await Groups.AddToGroupAsync(
-            Context.ConnectionId,
-            $"event-{eventId}");
+        await Groups.AddToGroupAsync(Context.ConnectionId, $"event-{eventId}");
+        Console.WriteLine($"Connection {Context.ConnectionId} joined event-{eventId} group");
     }
 
     public async Task LeaveEventGroup(int eventId)
     {
-        await Groups.RemoveFromGroupAsync(
-            Context.ConnectionId,
-            $"event-{eventId}");
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"event-{eventId}");
+        Console.WriteLine($"Connection {Context.ConnectionId} left event-{eventId} group");
     }
 
-    //cleanup on disconnect because user might have multiple connections (e.g. multiple tabs)
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
+        var userId = Context.UserIdentifier;
+        
+        if (userId != null)
+        {
+            Console.WriteLine($"User {userId} disconnected. Reason: {exception?.Message ?? "Normal disconnect"}");
+        }
+        
         await base.OnDisconnectedAsync(exception);
     }
 }

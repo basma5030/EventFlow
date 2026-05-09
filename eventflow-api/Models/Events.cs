@@ -21,9 +21,10 @@ namespace Eventflow.Models
         public string? rejectionReason { get; set; }
         public DateTime createdAt { get; set; }
 
-        public User Organizer { get; set; }
+        // Navigation properties
+        public User Organizer { get; set; } = null!;
         public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
-        public ICollection<Review> Reviews { get; set; }
-        = new List<Review>();
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
+        public ICollection<EventMaterial> Materials { get; set; } = new List<EventMaterial>();
     }
 }

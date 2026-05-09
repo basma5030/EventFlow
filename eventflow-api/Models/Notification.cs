@@ -8,9 +8,9 @@ namespace Eventflow.Models
         public string Message { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
         public bool IsRead { get; set; }
-        //nav properties
-        //nav
-        public User Recipient { get; set; }
-        public Events RelatedEvent { get; set; }
+
+        // Navigation properties
+        public User User { get; set; } = null!;
+        public Events Event { get; set; } = null!;
     }
 }

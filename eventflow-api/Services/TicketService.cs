@@ -23,23 +23,46 @@ public class TicketService
 
         try
         {
+            Console.WriteLine($"=== PURCHASE ATTEMPT ===");
+            Console.WriteLine($"UserId: {userId}, EventId: {eventId}");
+            
             var ev = await _db.Events
-                .FirstOrDefaultAsync(e => e.id == eventId && e.status == EventStatus.approved)
-                ?? throw new Exception("Event not found or not available.");
-
+                .FirstOrDefaultAsync(e => e.id == eventId);
+            
+            if (ev == null)
+            {
+                Console.WriteLine("ERROR: Event not found!");
+                throw new Exception("Event not found");
+            }
+            
+            Console.WriteLine($"Event found: {ev.title}, Status: {ev.status}, Available: {ev.availableTickets}");
+            
+            if (ev.status != EventStatus.approved)
+            {
+                Console.WriteLine("ERROR: Event not approved!");
+                throw new Exception("Event is not approved yet");
+            }
+            
             if (ev.availableTickets <= 0)
+            {
+                Console.WriteLine("ERROR: Sold out!");
                 throw new Exception("Sorry! This event is sold out.");
-
+            }
+            
             var existingTicket = await _db.Tickets
                 .AnyAsync(t => t.UserId == userId && t.EventId == eventId);
-
+            
             if (existingTicket)
+            {
+                Console.WriteLine("ERROR: User already has a ticket!");
                 throw new Exception("You have already purchased a ticket for this event.");
-
-            // Create Ticket QR
+            }
+            
             var uniqueCode = Guid.NewGuid().ToString();
             var qrBase64 = _qr.GenerateQrCode(uniqueCode);
-
+            
+            Console.WriteLine($"QR Code generated: {uniqueCode.Substring(0, 8)}...");
+            
             var ticket = new Ticket
             {
                 UserId = userId,
@@ -49,11 +72,10 @@ public class TicketService
                 PurchasedAt = DateTime.UtcNow,
                 PricePaid = ev.ticketPrice
             };
-
+            
             _db.Tickets.Add(ticket);
             ev.availableTickets--;
-
-            // create notification (same transaction)
+            
             var notification = new Notification
             {
                 UserId = userId,
@@ -62,31 +84,58 @@ public class TicketService
                 CreatedAt = DateTime.UtcNow,
                 IsRead = false
             };
-
+            
             _db.Notifications.Add(notification);
-
-            // single save
+            
             await _db.SaveChangesAsync();
             await transaction.CommitAsync();
-
-            //Broadcast updated count to everyone watching this event
-            await _hub.Clients
-                .Group($"event-{eventId}")
-                .SendAsync("TicketCountUpdated", new
+            
+            Console.WriteLine("SUCCESS: Ticket purchased!");
+            
+            // 9. إرسال إشعار فوري للمستخدم عبر SignalR - using User instead of Group
+            try
+            {
+                await _hub.Clients.User(userId.ToString()).SendAsync("ReceiveNotification", new
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Message = $"🎉 You successfully purchased a ticket for {ev.title}!",
+                    EventId = ev.id,
+                    CreatedAt = DateTime.UtcNow,
+                    IsRead = false
+                });
+                Console.WriteLine($"Notification sent to user {userId} via SignalR");
+            }
+            catch (Exception hubEx)
+            {
+                Console.WriteLine($"Hub broadcast error (non-critical): {hubEx.Message}");
+            }
+            
+            // 10. Broadcast تحديث عدد التذاكر للمشاهدين
+            try
+            {
+                await _hub.Clients.Group($"event-{eventId}").SendAsync("TicketCountUpdated", new
                 {
                     eventId = ev.id,
                     availableTickets = ev.availableTickets
                 });
-
+                Console.WriteLine($"Ticket count update broadcast to event-{eventId} group");
+            }
+            catch (Exception hubEx)
+            {
+                Console.WriteLine($"Hub broadcast error (non-critical): {hubEx.Message}");
+            }
+            
             return await MapToDto(ticket, ev);
         }
-        catch
+        catch (Exception ex)
         {
+            Console.WriteLine($"ERROR: {ex.Message}");
+            Console.WriteLine($"Stack trace: {ex.StackTrace}");
             await transaction.RollbackAsync();
             throw;
         }
     }
-
+    
     public async Task<List<TicketDto>> getMyTicketsAsync(int userId)
     {
         var tickets = await _db.Tickets
@@ -107,8 +156,7 @@ public class TicketService
     {
         var ticket = await _db.Tickets
             .Include(t => t.Events)
-            .FirstOrDefaultAsync(t => t.Id == ticketId 
-            && t.UserId == userId)
+            .FirstOrDefaultAsync(t => t.Id == ticketId && t.UserId == userId)
             ?? throw new Exception("Ticket not found.");
 
         return await MapToDto(ticket, ticket.Events);
@@ -118,6 +166,7 @@ public class TicketService
         Task.FromResult(new TicketDto
         {
             Id = t.Id,
+            EventId = ev.id,
             EventTitle = ev.title,
             EventVenue = ev.venue,
             EventDate = ev.eventDate,

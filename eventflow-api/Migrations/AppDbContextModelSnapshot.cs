@@ -22,6 +22,42 @@ namespace Event_flow.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("Eventflow.Models.EventMaterial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("OriginalName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("EventMaterials");
+                });
+
             modelBuilder.Entity("Eventflow.Models.Events", b =>
                 {
                     b.Property<int>("id")
@@ -31,11 +67,9 @@ namespace Event_flow.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("AttachmentPath")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImagePath")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("availableTickets")
@@ -59,7 +93,6 @@ namespace Event_flow.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("rejectionReason")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("status")
@@ -82,6 +115,8 @@ namespace Event_flow.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("id");
+
+                    b.HasIndex("organizerId");
 
                     b.ToTable("Events");
                 });
@@ -112,6 +147,10 @@ namespace Event_flow.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Notifications");
                 });
 
@@ -140,6 +179,8 @@ namespace Event_flow.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EventId");
 
                     b.HasIndex("UserId", "EventId")
                         .IsUnique();
@@ -242,22 +283,84 @@ namespace Event_flow.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EventId");
+
                     b.HasIndex("UserId", "EventId")
                         .IsUnique();
 
                     b.ToTable("Watchlist");
                 });
 
-            modelBuilder.Entity("Eventflow.Models.Ticket", b =>
+            modelBuilder.Entity("Eventflow.Models.EventMaterial", b =>
                 {
-                    b.HasOne("Eventflow.Models.Events", "Events")
+                    b.HasOne("Eventflow.Models.Events", "Event")
+                        .WithMany("Materials")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+                });
+
+            modelBuilder.Entity("Eventflow.Models.Events", b =>
+                {
+                    b.HasOne("Eventflow.Models.User", "Organizer")
+                        .WithMany("Events")
+                        .HasForeignKey("organizerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organizer");
+                });
+
+            modelBuilder.Entity("Eventflow.Models.Notification", b =>
+                {
+                    b.HasOne("Eventflow.Models.Events", "Event")
                         .WithMany()
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Eventflow.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Notifications")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Eventflow.Models.Review", b =>
+                {
+                    b.HasOne("Eventflow.Models.Events", "Event")
+                        .WithMany("Reviews")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Eventflow.Models.User", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Eventflow.Models.Ticket", b =>
+                {
+                    b.HasOne("Eventflow.Models.Events", "Events")
+                        .WithMany("Tickets")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Eventflow.Models.User", "User")
+                        .WithMany("Tickets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -265,6 +368,47 @@ namespace Event_flow.Migrations
                     b.Navigation("Events");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Eventflow.Models.Watchlist", b =>
+                {
+                    b.HasOne("Eventflow.Models.Events", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Eventflow.Models.User", "User")
+                        .WithMany("Watchlists")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Eventflow.Models.Events", b =>
+                {
+                    b.Navigation("Materials");
+
+                    b.Navigation("Reviews");
+
+                    b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("Eventflow.Models.User", b =>
+                {
+                    b.Navigation("Events");
+
+                    b.Navigation("Notifications");
+
+                    b.Navigation("Reviews");
+
+                    b.Navigation("Tickets");
+
+                    b.Navigation("Watchlists");
                 });
 #pragma warning restore 612, 618
         }

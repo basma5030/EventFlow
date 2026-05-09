@@ -12,7 +12,7 @@ public class FileHelper
         if (file == null || file.Length == 0)
             throw new Exception("Invalid file.");
 
-        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf" };
+        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf",".docx" };
 
         var ext = Path.GetExtension(file.FileName).ToLower();
 

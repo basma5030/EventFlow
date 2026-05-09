@@ -67,15 +67,17 @@ builder.Services.AddScoped<WatchlistService>();
 builder.Services.AddScoped<ReviewService>();
 builder.Services.AddScoped<TicketService>();
 
-//The difference between AddScoped and AddSingleton is that AddScoped creates a new instance of the service for each HTTP request, while AddSingleton creates a single instance that is shared across all requests.
-// In this case, since QrCodeHelper does not maintain any state and can be reused across requests, we can register it as a singleton to improve performance and reduce memory usage.
 builder.Services.AddSingleton<QrCodeHelper>();
 builder.Services.AddSignalR();
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.Converters
-        .Add(new JsonStringEnumConverter());
-});
+
+// ========== FIX JSON CYCLE ==========
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.MaxDepth = 64;
+    });
 
 builder.Services.AddCors(options =>
 {
@@ -90,12 +92,11 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-//middleware for global exception handling, we will create a custom middleware class for this later
-//app.UseMiddleware<ExceptionMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
 app.UseCors("ReactApp");
 app.UseStaticFiles();
 
@@ -104,7 +105,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-//for real time features
 app.MapHub<EventFlowHub>("/eventFlowHub");
 
 app.Run();
