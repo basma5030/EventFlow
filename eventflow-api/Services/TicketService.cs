@@ -58,6 +58,20 @@ public class TicketService
                 Console.WriteLine("ERROR: User already has a ticket!");
                 throw new ValidationException("You have already purchased a ticket for this event.");
             }
+
+            // Atomic update to prevent race conditions
+            var rowsAffected = await _db.Events
+                .Where(e => e.id == eventId && e.availableTickets > 0 && e.status == EventStatus.approved)
+                .ExecuteUpdateAsync(s => s.SetProperty(e => e.availableTickets, e => e.availableTickets - 1));
+
+            if (rowsAffected == 0)
+            {
+                Console.WriteLine("ERROR: Race condition caught - Sold out!");
+                throw new ValidationException("Sorry! This event just sold out.");
+            }
+
+            // Sync the in-memory entity so DTO mapping works correctly
+            ev.availableTickets--;
             
             var uniqueCode = Guid.NewGuid().ToString();
             var qrBase64 = _qr.GenerateQrCode(uniqueCode);
@@ -75,7 +89,6 @@ public class TicketService
             };
             
             _db.Tickets.Add(ticket);
-            ev.availableTickets--;
             
             var notification = new Notification
             {

@@ -211,7 +211,7 @@ public class EventService
         var ev = await _db.Events
             .FirstOrDefaultAsync(e => e.id == eventId 
             && e.organizerId == organizerId)
-            ?? throw new Exception("Event not found or access denied.");
+            ?? throw new NotFoundException("Event not found or access denied.");
 
         if (image != null)
             ev.ImagePath = await _fileHelper.SaveFileAsync(image, eventId);
@@ -228,7 +228,7 @@ public class EventService
     {
         var ev = await _db.Events
             .FirstOrDefaultAsync(e => e.id == eventId && e.organizerId == organizerId)
-            ?? throw new Exception("Event not found or access denied.");
+            ?? throw new NotFoundException("Event not found or access denied.");
 
         var filePath = await _fileHelper.SaveFileAsync(file, eventId);
 

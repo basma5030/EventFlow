@@ -64,7 +64,7 @@ public class AdminService
 
         if(user.IsApproved)
         {
-            throw new ForbiddenException("Cannot reject an already approved organizer.")
+            throw new ForbiddenException("Cannot reject an already approved organizer.");
         }
         _db.Users.Remove(user);
         await _db.SaveChangesAsync();
