@@ -9,7 +9,7 @@ namespace Eventflow.Models
         public DateTime CreatedAt { get; set; }
         public bool IsRead { get; set; }
 
-        // Navigation properties
+        // Navigation properties, 1 event and user have many notf.
         public User User { get; set; } = null!;
         public Events Event { get; set; } = null!;
     }

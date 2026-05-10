@@ -6,6 +6,7 @@ using Eventflow.Models.Enums;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
+//admin gets, approves, rejects for 2 elements organizer acc and events.
 public class AdminService
 {
     private readonly AppDbContext _db;

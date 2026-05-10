@@ -14,7 +14,7 @@ public class NotificationService
         _db = db;
         _hub = hub;
     }
-
+    //get all notifications for a user, sorted by most recent.
     public async Task<List<Notification>> GetMyNotificationsAsync(int userId)
     {
         return await _db.Notifications
@@ -22,7 +22,7 @@ public class NotificationService
             .OrderByDescending(n => n.CreatedAt)
             .ToListAsync();
     }
-
+    //get only unread notifications for a user, sorted by most recent.
     public async Task<List<Notification>> GetUnreadAsync(int userId)
     {
         return await _db.Notifications
@@ -30,7 +30,7 @@ public class NotificationService
             .OrderByDescending(n => n.CreatedAt)
             .ToListAsync();
     }
-
+    //mark a notification as read
     public async Task MarkAsReadAsync(int id, int userId)
     {
         var notification = await _db.Notifications
@@ -67,6 +67,9 @@ public class NotificationService
         .Group($"user-{userId}")
         .SendAsync("AllNotificationsRead");
     }
+    
+
+
 
     public async Task SendNotificationAsync(int userId,
      int eventId, string message)
@@ -84,6 +87,7 @@ public class NotificationService
     await _db.SaveChangesAsync();
 
     //send only to intended recipent.
+    //SignalR connection after login and added to group "user-{userId}" for targeted notifications
     await _hub.Clients
         .Group($"user-{userId}")
         .SendAsync("ReceiveNotification", new

@@ -13,6 +13,7 @@ public class WatchlistService
 
     public async Task<List<EventDto>> getWatchListAsync(int userId)
     {
+        //from watchlist table join event and org where events are approved and saved and fetch the event dto
         return await _db.Watchlist
         .Include(w => w.Event)
         .ThenInclude(e => e.Organizer)
@@ -52,6 +53,7 @@ public class WatchlistService
         _db.Watchlist.Remove(entry);
         await _db.SaveChangesAsync();
     }  
+    //used for frontend to check if event is in watchlits, for button state.
     public async Task<bool> IsWatchlistedAsync(int userId, int eventId)
     {
         return await _db.Watchlist

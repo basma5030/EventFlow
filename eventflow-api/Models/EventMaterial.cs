@@ -10,7 +10,7 @@ namespace Eventflow.Models
         public string ContentType { get; set; } = null!;
         public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
 
-        // Navigation property
+        // Navigation property 1 to 1 with Events
         public Events Event { get; set; } = null!;
     }
 }

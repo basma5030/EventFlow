@@ -10,7 +10,7 @@ namespace Eventflow.Models
         public string QRCode { get; set; } = null!;
         public string UniqueCode { get; set; } = null!;
         public double PricePaid { get; set; }
-
+        // Navigation properties, many tickets per event and user
         public User User { get; set; } = null!;
         public Events Events { get; set; } = null!;
     }
