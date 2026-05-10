@@ -15,6 +15,7 @@ interface Event {
   availableTickets: number;
   status: string;
   imageUrl: string | null;
+  rejectionReason?: string;
 }
 
 const OrganizerDashboard = () => {
@@ -206,12 +207,24 @@ const OrganizerDashboard = () => {
                         </div>
                         <p className="text-xs font-bold text-gray-600">{sold} / {event.totalTickets} Tickets sold</p>
                       </td>
+                      {/* ✅ التعديل هنا */}
                       <td className="p-8">
-                        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${
-                          event.status === 'approved' ? 'bg-green-100 text-green-600' : 'bg-orange-100 text-orange-600'
-                        }`}>
-                          {event.status === 'approved' ? 'Accepted' : 'Pending Approval'}
-                        </span>
+                        <div className="flex flex-col gap-1">
+                          <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter text-center ${
+                            event.status === 'approved' ? 'bg-green-100 text-green-600' :
+                            event.status === 'rejected' ? 'bg-red-100 text-red-600' :
+                            'bg-orange-100 text-orange-600'
+                          }`}>
+                            {event.status === 'approved' ? '✅ Accepted' :
+                             event.status === 'rejected' ? '❌ Rejected' :
+                             '⏳ Pending Approval'}
+                          </span>
+                          {event.status === 'rejected' && event.rejectionReason && (
+                            <p className="text-[10px] text-red-500 text-center italic">
+                              Reason: {event.rejectionReason}
+                            </p>
+                          )}
+                        </div>
                       </td>
                       <td className="p-8">
                         <div className="flex justify-center gap-2">

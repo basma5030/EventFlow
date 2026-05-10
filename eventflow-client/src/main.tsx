@@ -9,6 +9,7 @@ import EventDetails from './pages/EventDetails'
 import CreateEvent from './pages/CreateEvent'
 import EditEvent from './pages/EditEvent'
 import AdminDashboard from './pages/AdminDashboard'
+import AdminEventDetails from './pages/AdminEventDetails'
 import MyTickets from './pages/MyTickets'
 import Watchlist from './pages/Watchlist'
 import OrganizerDashboard from './pages/OrganizerDashboard'
@@ -39,6 +40,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/admin" element={
             <ProtectedRoute allowedRoles={['Admin']}>
               <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/event/:id" element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <AdminEventDetails />
             </ProtectedRoute>
           } />
           <Route path="/my-tickets" element={

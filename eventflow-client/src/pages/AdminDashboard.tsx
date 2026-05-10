@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { adminAPI } from '../api/admin';
 
 interface Organizer {
@@ -19,6 +20,7 @@ interface PendingEvent {
 }
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('organizers');
   const [organizers, setOrganizers] = useState<Organizer[]>([]);
   const [pendingEvents, setPendingEvents] = useState<PendingEvent[]>([]);
@@ -129,9 +131,9 @@ const AdminDashboard = () => {
           <h1 className="text-3xl font-black text-gray-800 uppercase tracking-tighter">
             {activeTab === 'organizers' ? 'Organizer Requests' : 'Event Approvals'}
           </h1>
-          <div className="bg-white px-4 py-2 rounded-full shadow-sm border text-sm font-bold text-[#1e4e8c]">
-            Admin Mode
-          </div>
+          <Link to="/" className="text-[#1e4e8c] font-bold border-2 border-[#1e4e8c] px-6 py-2 rounded-xl hover:bg-[#1e4e8c] hover:text-white transition">
+            Exit to Site
+          </Link>
         </header>
 
         {error && (
@@ -194,7 +196,11 @@ const AdminDashboard = () => {
               </div>
             ) : (
               pendingEvents.map(event => (
-                <div key={event.id} className="bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100 flex flex-col">
+                <div 
+                  key={event.id} 
+                  onClick={() => navigate(`/admin/event/${event.id}`)}
+                  className="bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100 flex flex-col cursor-pointer hover:shadow-2xl transition-all hover:-translate-y-1"
+                >
                   <div className="flex justify-between items-start mb-4">
                     <span className="bg-blue-50 text-blue-600 text-[10px] font-black px-3 py-1 rounded-full uppercase italic">
                       {event.category}
@@ -203,15 +209,15 @@ const AdminDashboard = () => {
                   </div>
                   <h3 className="text-xl font-bold text-gray-800 mb-2">{event.title}</h3>
                   <p className="text-gray-400 text-sm mb-6">Requested by: <span className="text-gray-600 font-bold">{event.organizerName}</span></p>
-                  <div className="mt-auto flex gap-4">
+                  <div className="mt-auto flex gap-4" onClick={(e) => e.stopPropagation()}>
                     <button 
-                      onClick={() => approveEvent(event.id)}
+                      onClick={(e) => { e.stopPropagation(); approveEvent(event.id); }}
                       className="flex-1 bg-[#1e4e8c] text-white py-3 rounded-xl font-bold hover:bg-blue-800 transition shadow-lg shadow-blue-100"
                     >
                       Approve Event
                     </button>
                     <button 
-                      onClick={() => rejectEvent(event.id)}
+                      onClick={(e) => { e.stopPropagation(); rejectEvent(event.id); }}
                       className="flex-1 bg-gray-100 text-gray-400 py-3 rounded-xl font-bold hover:bg-red-50 hover:text-red-600 transition"
                     >
                       Reject

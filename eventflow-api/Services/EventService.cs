@@ -58,15 +58,11 @@ public class EventService
             .FirstOrDefaultAsync(e => e.id == eventId && e.organizerId == organizerId)
             ?? throw new NotFoundException("Event not found or access denied.");
 
-        // Save old values
-
         var oldTitle = ev.title;
         var oldDate = ev.eventDate;
         var oldVenue = ev.venue;
         var oldPrice = ev.ticketPrice;
         var oldCategory = ev.category;
-
-        //The edits
         
         ev.title = updated.title;
         ev.description = updated.description;
@@ -88,7 +84,6 @@ public class EventService
 
         await _db.SaveChangesAsync();
 
-        // Edit message list.
         var changes = new List<string>();
 
         if (oldTitle != updated.title)
@@ -162,7 +157,6 @@ public class EventService
         };
     }
 
-    //only approved endpoints
     public async Task<List<EventDto>> GetApprovedEventsAsync()
     {
         return await _db.Events
@@ -172,7 +166,6 @@ public class EventService
             .ToListAsync();
     }
 
-    //the events that organizer is in charge of
     public async Task<List<EventDto>> getOrganizerEventsAsync(int organizerId)
     {
         return await _db.Events
@@ -183,7 +176,6 @@ public class EventService
             .ToListAsync();
     }
 
-    //search queries
     public async Task<List<EventDto>> SearchEventsAsync(string? venue, string? category, DateTime? date)
     {
         var query = _db.Events
@@ -205,25 +197,20 @@ public class EventService
             .ToListAsync();
     }
 
-    //Uses file helper in helpers
     public async Task<EventDto> UploadEventFilesAsync(int organizerId, int eventId, IFormFile image, IFormFile attachment)
     {
         var ev = await _db.Events
-            .FirstOrDefaultAsync(e => e.id == eventId 
-            && e.organizerId == organizerId)
+            .FirstOrDefaultAsync(e => e.id == eventId && e.organizerId == organizerId)
             ?? throw new NotFoundException("Event not found or access denied.");
 
         if (image != null)
             ev.ImagePath = await _fileHelper.SaveFileAsync(image, eventId);
 
-        if (attachment != null)
-            ev.AttachmentPath = await _fileHelper.SaveFileAsync(attachment, eventId);
-
+      
         await _db.SaveChangesAsync();
         return MapToDto(ev);
     }
 
-    // ========== Upload single material ==========
     public async Task<EventMaterial> UploadSingleMaterialAsync(int organizerId, int eventId, IFormFile file)
     {
         var ev = await _db.Events
@@ -245,13 +232,11 @@ public class EventService
         _db.EventMaterials.Add(material);
         await _db.SaveChangesAsync();
 
-        // Send update notification
         await NotifyAttendees(eventId, $"📎 New material '{file.FileName}' was added to event '{ev.title}'");
 
         return material;
     }
 
-    // ========== Delete material ==========
     public async Task DeleteMaterialAsync(int organizerId, int eventId, int materialId)
     {
         var material = await _db.EventMaterials
@@ -272,8 +257,6 @@ public class EventService
         await _db.SaveChangesAsync();
     }
 
-    // ========== Helper: Notify all attendees ==========
-    //Point is, notify when the event's updated
     private async Task NotifyAttendees(int eventId, string message)
     {
         var attendees = await _db.Tickets
@@ -295,7 +278,6 @@ public class EventService
         }
     }
 
-    //Model to dto mapper
     public static EventDto MapToDto(Events e) => new()
     {
         id = e.id,
@@ -309,7 +291,6 @@ public class EventService
         totalTickets = e.totalTickets,
         availableTickets = e.availableTickets,
         imageUrl = e.ImagePath,
-        attachmentUrl = e.AttachmentPath,
         status = e.status.ToString(),
         rejectionReason = e.rejectionReason,
         createdAt = e.createdAt

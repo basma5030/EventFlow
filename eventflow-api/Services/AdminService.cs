@@ -124,7 +124,6 @@ public class AdminService
             totalTickets = e.totalTickets,
             availableTickets = e.availableTickets,
             imageUrl = e.ImagePath,
-            attachmentUrl = e.AttachmentPath,
             status = e.status.ToString(),
             rejectionReason = e.rejectionReason,
             createdAt        = e.createdAt

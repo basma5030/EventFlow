@@ -4,7 +4,6 @@ using Eventflow.Models;
 using Eventflow.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Eventflow.Exceptions;
 namespace Eventflow.DTOs;
 public class AuthService
 {

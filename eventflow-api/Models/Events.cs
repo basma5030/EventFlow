@@ -16,7 +16,6 @@ namespace Eventflow.Models
         public int totalTickets { get; set; }
         public int availableTickets { get; set; }
         public string? ImagePath { get; set; }
-        public string? AttachmentPath { get; set; }
         public EventStatus status { get; set; } = EventStatus.pending;
         public string? rejectionReason { get; set; }
         public DateTime createdAt { get; set; }

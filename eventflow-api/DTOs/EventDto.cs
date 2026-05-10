@@ -13,7 +13,7 @@ namespace Eventflow.DTOs
         public int totalTickets { get; set; }
         public int availableTickets { get; set; }
         public string? imageUrl { get; set; } = null!;
-        public string? attachmentUrl { get; set; } = null!;
+        
         public string status { get; set; } = null!;
         public string? rejectionReason { get; set; } = null!;
          public DateTime createdAt {get; set;}

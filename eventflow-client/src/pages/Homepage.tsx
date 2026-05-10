@@ -30,25 +30,57 @@ const Homepage = () => {
   const [searchDate, setSearchDate] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   
   const { notifications, unreadCount, markAllAsRead } = useSignalR();
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
+  // دالة البحث المتقدم
+  const performSearch = async () => {
+    try {
+      setIsSearching(true);
+      setLoading(true);
+      
+      const params: any = {};
+      
+      // البحث من الـ Search Box العلوي - بنبحث في كل الحقول الممكنة
+      if (searchTerm && searchTerm.trim()) {
+        params.venue = searchTerm;
+        params.category = searchTerm;
+        params.title = searchTerm;  // ✅ بنضيف title عشان يبحث في العنوان برضه
+      }
+      
+      // الفلاتر المتقدمة
+      if (searchVenue && searchVenue.trim()) params.venue = searchVenue;
+      if (searchCategory && searchCategory.trim()) params.category = searchCategory;
+      if (searchDate) params.date = searchDate;
+      
+      console.log('🔍 Searching with params:', JSON.stringify(params, null, 2));
+      
+      // لو مفيش أي معامل بحث، نجيب كل الفعاليات
+      if (Object.keys(params).length === 0) {
+        const response = await eventsAPI.getAll();
+        setEvents(response.data);
+        console.log('📋 Fetched all events:', response.data.length);
+      } else {
+        const response = await eventsAPI.search(params);
+        setEvents(response.data);
+        console.log('📋 Search results:', response.data.length);
+      }
+    } catch (error) {
+      console.error('❌ Error searching events:', error);
+    } finally {
+      setLoading(false);
+      setIsSearching(false);
+    }
+  };
 
-  useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      performSearch();
-    }, 500);
-    return () => clearTimeout(delayDebounce);
-  }, [searchTerm, searchVenue, searchCategory, searchDate]);
-
-  const fetchEvents = async () => {
+  // دالة جلب كل الفعاليات
+  const fetchAllEvents = async () => {
     try {
       setLoading(true);
       const response = await eventsAPI.getAll();
       setEvents(response.data);
+      console.log('📋 Fetched all events on load:', response.data.length);
     } catch (error) {
       console.error('Error fetching events:', error);
     } finally {
@@ -56,38 +88,32 @@ const Homepage = () => {
     }
   };
 
-  const performSearch = async () => {
-    try {
-      setLoading(true);
-      const params: any = {};
-      if (searchTerm) {
-        params.venue = searchTerm;
-        params.category = searchTerm;
-      }
-      if (searchVenue) params.venue = searchVenue;
-      if (searchCategory) params.category = searchCategory;
-      if (searchDate) params.date = searchDate;
-      
-      if (Object.keys(params).length === 0) {
-        const response = await eventsAPI.getAll();
-        setEvents(response.data);
-      } else {
-        const response = await eventsAPI.search(params);
-        setEvents(response.data);
-      }
-    } catch (error) {
-      console.error('Error searching events:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // عند تحميل الصفحة لأول مرة: نجيب كل الفعاليات
+  useEffect(() => {
+    fetchAllEvents();
+  }, []);
 
+  // البحث التلقائي عند تغيير أي فلتر أو search term
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      performSearch();
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchTerm, searchVenue, searchCategory, searchDate]);
+
+  // مسح كل الفلاتر
   const clearFilters = () => {
     setSearchTerm('');
     setSearchVenue('');
     setSearchCategory('');
     setSearchDate('');
-    fetchEvents();
+  };
+
+  // البحث عند الضغط على Enter
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      performSearch();
+    }
   };
 
   const handleLogout = () => {
@@ -102,7 +128,7 @@ const Homepage = () => {
     return 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=800';
   };
 
-  if (loading) {
+  if (loading && !isSearching) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -115,8 +141,6 @@ const Homepage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      
-
       {/* NAVBAR */}
       <div className="bg-[#1e4e8c] text-white pb-32 shadow-2xl relative overflow-hidden">
         <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto w-full relative z-10">
@@ -147,59 +171,57 @@ const Homepage = () => {
                 
                 {/* Notification Bell */}
                 <div className="relative">
-  <button 
-    onClick={() => {
-      setShowNotifications(!showNotifications);
-      // النقطة تختفي أول ما أفتح القائمة
-      if (!showNotifications && unreadCount > 0) {
-        markAllAsRead();
-      }
-    }}
-    className="p-2 hover:bg-white/10 rounded-full transition text-xl relative"
-  >
-    🔔
-    {unreadCount > 0 && (
-      <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full" />
-    )}
-  </button>
+                  <button 
+                    onClick={() => {
+                      setShowNotifications(!showNotifications);
+                      if (!showNotifications && unreadCount > 0) {
+                        markAllAsRead();
+                      }
+                    }}
+                    className="p-2 hover:bg-white/10 rounded-full transition text-xl relative"
+                  >
+                    🔔
+                    {unreadCount > 0 && (
+                      <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full" />
+                    )}
+                  </button>
 
-  {showNotifications && (
-    <div className="absolute left-0 mt-4 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[9999] text-gray-800 max-h-96 overflow-y-auto">
-      <div className="p-3 bg-gray-50 border-b flex justify-between items-center sticky top-0">
-        <span className="text-xs font-bold text-gray-400">
-          🔔 Notifications ({notifications.length})
-        </span>
-        {notifications.length > 0 && (
-          <button 
-            onClick={() => {
-              markAllAsRead();
-              // عشان النقطة تروح فوراً
-              setShowNotifications(false);
-            }}
-            className="text-xs text-blue-500 hover:underline"
-          >
-            Mark all read
-          </button>
-        )}
-      </div>
-      {notifications.length === 0 ? (
-        <div className="p-6 text-center text-gray-400 text-sm">No notifications yet</div>
-      ) : (
-        notifications.map((notif, idx) => (
-          <div 
-            key={idx} 
-            className={`p-3 border-b hover:bg-blue-50 transition ${!notif.isRead ? 'bg-blue-50/50' : ''}`}
-          >
-            <p className="text-sm text-gray-800">{notif.message}</p>
-            <p className="text-[10px] text-gray-400 mt-1">
-              {new Date(notif.createdAt).toLocaleString()}
-            </p>
-          </div>
-        ))
-      )}
-    </div>
-  )}
-</div>
+                  {showNotifications && (
+                    <div className="absolute left-0 mt-4 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[9999] text-gray-800 max-h-96 overflow-y-auto">
+                      <div className="p-3 bg-gray-50 border-b flex justify-between items-center sticky top-0">
+                        <span className="text-xs font-bold text-gray-400">
+                          🔔 Notifications ({notifications.length})
+                        </span>
+                        {notifications.length > 0 && (
+                          <button 
+                            onClick={() => {
+                              markAllAsRead();
+                              setShowNotifications(false);
+                            }}
+                            className="text-xs text-blue-500 hover:underline"
+                          >
+                            Mark all read
+                          </button>
+                        )}
+                      </div>
+                      {notifications.length === 0 ? (
+                        <div className="p-6 text-center text-gray-400 text-sm">No notifications yet</div>
+                      ) : (
+                        notifications.map((notif, idx) => (
+                          <div 
+                            key={idx} 
+                            className={`p-3 border-b hover:bg-blue-50 transition ${!notif.isRead ? 'bg-blue-50/50' : ''}`}
+                          >
+                            <p className="text-sm text-gray-800">{notif.message}</p>
+                            <p className="text-[10px] text-gray-400 mt-1">
+                              {new Date(notif.createdAt).toLocaleString()}
+                            </p>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  )}
+                </div>
                 
                 <Link to="/my-tickets" className="text-[10px] font-black bg-white text-[#1e4e8c] px-4 py-2.5 rounded-xl uppercase tracking-tighter">My Tickets</Link>
               </div>
@@ -239,7 +261,8 @@ const Homepage = () => {
               placeholder="Search by event name, category, or venue..." 
               className="w-full py-4 outline-none text-gray-800 font-medium text-lg"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} 
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
             <button 
               onClick={() => setShowFilters(!showFilters)}
@@ -307,11 +330,15 @@ const Homepage = () => {
           </h3>
         </div>
         
-        {events.length > 0 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {loading ? (
+          <div className="text-center py-32">
+            <div className="w-12 h-12 border-4 border-[#1e4e8c] border-t-transparent rounded-full animate-spin mx-auto"></div>
+          </div>
+        ) : events.length > 0 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             {events.map(event => (
               <div key={event.id} className="group bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden flex flex-col md:flex-row transform hover:-translate-y-2 transition-all duration-500">
-                <div className="w-full md:w-2/5 h-64 md:h-auto overflow-hidden relative">
+                <div className="w-full md:w-2/5 h-56 md:h-auto overflow-hidden relative">
                   <img 
                     src={getImageUrl(event.imageUrl)} 
                     alt={event.title} 
@@ -326,7 +353,7 @@ const Homepage = () => {
                     {event.availableTickets > 0 ? `${event.availableTickets} tickets left` : 'Sold Out'}
                   </span>
                 </div>
-                <div className="p-8 flex flex-col flex-grow md:w-3/5 justify-between">
+                <div className="p-6 flex flex-col flex-grow md:w-3/5 justify-between">
                   <div>
                     <h4 className="font-black text-2xl text-gray-800 leading-tight mb-2">{event.title}</h4>
                     <p className="text-xs text-gray-400 font-medium mb-2">by {event.organizerName}</p>

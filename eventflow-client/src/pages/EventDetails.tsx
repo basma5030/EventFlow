@@ -40,11 +40,6 @@ interface Review {
   createdAt: string;
 }
 
-interface EventWithMaterials {
-  event: Event;
-  materials: Material[];
-}
-
 const EventDetails = () => {
   const { id } = useParams();
   const { isLoggedIn, userRole } = useAuth();
@@ -67,17 +62,16 @@ const EventDetails = () => {
   const [submittingReview, setSubmittingReview] = useState(false);
   const [hasPurchasedTicket, setHasPurchasedTicket] = useState(false);
 
-  // SignalR for notifications
   const { notifications, unreadCount, markAllAsRead } = useSignalR();
 
   useEffect(() => {
     const fetchEvent = async () => {
       try {
         setLoading(true);
+        // ✅ استخدام getEventWithMaterials عشان يجيب المواد مع الحدث
         const response = await eventsAPI.getEventWithMaterials(Number(id));
-        const data: EventWithMaterials = response.data;
-        setEvent(data.event);
-        setMaterials(data.materials);
+        setEvent(response.data.event);
+        setMaterials(response.data.materials || []);
       } catch (err) {
         console.error('Error fetching event:', err);
         setError('Event not found');
@@ -310,67 +304,63 @@ const EventDetails = () => {
             </>
           ) : (
             <div className="flex items-center gap-3">
-              {/* Watchlist Heart */}
               {isLoggedIn && userRole === 'Participant' && (
                 <Link to="/watchlist" className="text-xl hover:opacity-80 transition">❤️</Link>
               )}
               
-              {/* Notification Bell - Only for Participants */}
               {isLoggedIn && userRole === 'Participant' && (
                 <div className="relative">
-  <button 
-    onClick={() => {
-      setShowNotifications(!showNotifications);
-      // النقطة تختفي أول ما أفتح القائمة
-      if (!showNotifications && unreadCount > 0) {
-        markAllAsRead();
-      }
-    }}
-    className="p-2 hover:bg-white/10 rounded-full transition text-xl relative"
-  >
-    🔔
-    {unreadCount > 0 && (
-      <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full" />
-    )}
-  </button>
+                  <button 
+                    onClick={() => {
+                      setShowNotifications(!showNotifications);
+                      if (!showNotifications && unreadCount > 0) {
+                        markAllAsRead();
+                      }
+                    }}
+                    className="p-2 hover:bg-white/10 rounded-full transition text-xl relative"
+                  >
+                    🔔
+                    {unreadCount > 0 && (
+                      <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full" />
+                    )}
+                  </button>
 
-  {showNotifications && (
-    <div className="absolute left-0 mt-4 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[9999] text-gray-800 max-h-96 overflow-y-auto">
-      <div className="p-3 bg-gray-50 border-b flex justify-between items-center sticky top-0">
-        <span className="text-xs font-bold text-gray-400">
-          🔔 Notifications ({notifications.length})
-        </span>
-        {notifications.length > 0 && (
-          <button 
-            onClick={() => {
-              markAllAsRead();
-              // عشان النقطة تروح فوراً
-              setShowNotifications(false);
-            }}
-            className="text-xs text-blue-500 hover:underline"
-          >
-            Mark all read
-          </button>
-        )}
-      </div>
-      {notifications.length === 0 ? (
-        <div className="p-6 text-center text-gray-400 text-sm">No notifications yet</div>
-      ) : (
-        notifications.map((notif, idx) => (
-          <div 
-            key={idx} 
-            className={`p-3 border-b hover:bg-blue-50 transition ${!notif.isRead ? 'bg-blue-50/50' : ''}`}
-          >
-            <p className="text-sm text-gray-800">{notif.message}</p>
-            <p className="text-[10px] text-gray-400 mt-1">
-              {new Date(notif.createdAt).toLocaleString()}
-            </p>
-          </div>
-        ))
-      )}
-    </div>
-  )}
-</div>
+                  {showNotifications && (
+                    <div className="absolute left-0 mt-4 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[9999] text-gray-800 max-h-96 overflow-y-auto">
+                      <div className="p-3 bg-gray-50 border-b flex justify-between items-center sticky top-0">
+                        <span className="text-xs font-bold text-gray-400">
+                          🔔 Notifications ({notifications.length})
+                        </span>
+                        {notifications.length > 0 && (
+                          <button 
+                            onClick={() => {
+                              markAllAsRead();
+                              setShowNotifications(false);
+                            }}
+                            className="text-xs text-blue-500 hover:underline"
+                          >
+                            Mark all read
+                          </button>
+                        )}
+                      </div>
+                      {notifications.length === 0 ? (
+                        <div className="p-6 text-center text-gray-400 text-sm">No notifications yet</div>
+                      ) : (
+                        notifications.map((notif, idx) => (
+                          <div 
+                            key={idx} 
+                            className={`p-3 border-b hover:bg-blue-50 transition ${!notif.isRead ? 'bg-blue-50/50' : ''}`}
+                          >
+                            <p className="text-sm text-gray-800">{notif.message}</p>
+                            <p className="text-[10px] text-gray-400 mt-1">
+                              {new Date(notif.createdAt).toLocaleString()}
+                            </p>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  )}
+                </div>
               )}
               
               <div className="w-10 h-10 bg-[#1e4e8c] text-white rounded-full flex items-center justify-center font-bold">
@@ -413,6 +403,7 @@ const EventDetails = () => {
             <p className="text-gray-600 leading-relaxed text-lg">{event.description}</p>
           </div>
 
+          {/* ✅ Event Materials - ظاهرة دلوقتي */}
           {materials && materials.length > 0 && (
             <div className="mb-12 p-4 bg-gray-50 rounded-2xl border border-gray-200">
               <h4 className="font-bold text-gray-700 mb-3 flex items-center gap-2">

@@ -22,7 +22,17 @@ const CreateEvent = () => {
     totalTickets: '',
   });
 
+  // ✅ دالة التحقق من صحة التاريخ
+  const isDateValid = (dateString: string) => {
+    if (!dateString) return false;
+    const selectedDate = new Date(dateString);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return selectedDate >= today;
+  };
+
   const nextStep = () => {
+    // ✅ التحقق من الصورة في step 2
     if (step === 2 && !imageFile) {
       setError('Please upload an event image before proceeding');
       return;
@@ -50,6 +60,12 @@ const CreateEvent = () => {
     
     if (!formData.eventDate) {
       setError('Please select an event date');
+      return;
+    }
+    
+    // ✅ التحقق من صحة التاريخ قبل الإرسال
+    if (!isDateValid(formData.eventDate)) {
+      setError('❌ Event date cannot be in the past. Please select a future date.');
       return;
     }
     
@@ -98,17 +114,33 @@ const CreateEvent = () => {
         } catch (rollbackErr) {
           console.error('Failed to rollback event:', rollbackErr);
         }
-        throw uploadErr; // Rethrow to show the error message in the outer catch block
+        throw uploadErr;
       }
       
       alert('Event submitted for Admin Approval!');
       navigate('/organizer-dashboard');
     } catch (err: any) {
       console.error('Error creating event:', err);
-      setError(err.response?.data?.message || 'Failed to create event');
+      
+      // ✅ التعامل مع رسالة الخطأ من الـ Backend
+      const backendMessage = err.response?.data?.message;
+      const backendError = err.response?.data?.errors?.eventDate?.[0];
+      
+      if (backendError || (backendMessage && backendMessage.includes('future'))) {
+        setError('❌ Event date must be in the future. Please select a valid date.');
+      } else {
+        setError(backendMessage || 'Failed to create event');
+      }
     } finally {
       setLoading(false);
     }
+  };
+
+  // ✅ حساب أقل تاريخ مسموح به (النهاردة)
+  const getMinDate = () => {
+    const today = new Date();
+    today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    return today.toISOString().slice(0, 16);
   };
 
   return (
@@ -125,8 +157,8 @@ const CreateEvent = () => {
 
         <form onSubmit={handleSubmit} className="p-8">
           {error && (
-            <div className="mb-4 p-3 bg-red-100 text-red-600 rounded-xl text-sm">
-              {error}
+            <div className="mb-4 p-3 bg-red-100 text-red-600 rounded-xl text-sm font-medium">
+              ⚠️ {error}
             </div>
           )}
 
@@ -192,9 +224,17 @@ const CreateEvent = () => {
                   type="datetime-local" 
                   className="mt-1 w-full p-3 border rounded-xl"
                   value={formData.eventDate}
-                  onChange={(e) => setFormData({...formData, eventDate: e.target.value})}
+                  onChange={(e) => {
+                    setFormData({...formData, eventDate: e.target.value});
+                    // ✅ مسح الخطأ لما المستخدم يغير التاريخ
+                    if (error && error.includes('date')) {
+                      setError('');
+                    }
+                  }}
+                  min={getMinDate()}  // ✅ منع اختيار تواريخ ماضية
                   required
                 />
+                <p className="text-xs text-gray-400 mt-1">Select a date and time in the future</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Event Image *</label>
