@@ -103,10 +103,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseCors("ReactApp");
 app.UseStaticFiles();
-
 app.UseRouting();
+app.UseCors("ReactApp");
+
 app.UseAuthentication();
 app.UseAuthorization();
 

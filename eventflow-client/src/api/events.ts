@@ -5,7 +5,8 @@ export const eventsAPI = {
   
   getById: (id: number) => api.get(`/events/${id}`),
   
-  search: (params: { venue?: string; category?: string; date?: string; title?: string }) =>
+  search: (params: { venue?: string; category?:
+    string; date?: string; title?: string,searchTerm?:string}) =>
     api.get('/events/search', { params }),
   
   getMyEvents: () => api.get('/events/my'),

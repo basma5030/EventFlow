@@ -182,12 +182,23 @@ public class EventService
     }
 
     //search events with multiple optional filters, for public search.
-    public async Task<List<EventDto>> SearchEventsAsync(string? venue, string? category, DateTime? date, string? title)
+    public async Task<List<EventDto>> SearchEventsAsync(string? venue, string? category,
+     DateTime? date, string? title,string? searchTerm)
     {
         var query = _db.Events
             .Where(e => e.status == EventStatus.approved)
             .AsQueryable();
 
+        // General search (OR logic)
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+        var term = searchTerm.ToLower().Trim();
+           query = query.Where(e => e.title.ToLower().Contains(term) 
+                           || e.venue.ToLower().Contains(term) 
+                           || e.category.ToLower().Contains(term));
+        }
+
+        //filters with AND logic
         if (!string.IsNullOrEmpty(title))
             query = query.Where(e => e.title.Contains(title));
 

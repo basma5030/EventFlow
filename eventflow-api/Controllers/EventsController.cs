@@ -65,9 +65,11 @@ namespace Eventflow.Controllers
             [FromQuery] string? venue,
             [FromQuery] string? category,
             [FromQuery] DateTime? date,
-            [FromQuery] string? title)
+            [FromQuery] string? title,
+            [FromQuery] string? searchTerm)
         {
-            var data = await _service.SearchEventsAsync(venue, category, date, title);
+            var data = await _service.SearchEventsAsync(venue, category, date,
+             title, searchTerm);
             return Ok(data);
         }
 
