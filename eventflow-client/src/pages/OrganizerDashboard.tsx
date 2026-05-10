@@ -71,9 +71,9 @@ const OrganizerDashboard = () => {
         await eventsAPI.delete(id);
         setMyEvents(myEvents.filter(ev => ev.id !== id));
         alert('Event deleted successfully');
-      } catch (err) {
+      } catch (err: any) {
         console.error('Error deleting event:', err);
-        alert('Failed to delete event');
+        alert(err.response?.data?.message || 'Failed to delete event');
       }
     }
   };
@@ -95,16 +95,17 @@ const OrganizerDashboard = () => {
       const formData = new FormData();
       formData.append('attachment', attachmentFile);
       
-      // ✅ استخدام الدالة الصحيحة لرفع المواد
+      // using the right method to upload materials
+      
       await eventsAPI.uploadMaterial(selectedEventId, formData);
       alert('Material uploaded successfully!');
       setShowUploadModal(false);
       setAttachmentFile(null);
       // Refresh the events list
       fetchMyEvents();
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error uploading material:', err);
-      alert('Failed to upload material');
+      alert(err.response?.data?.message || 'Failed to upload material');
     } finally {
       setUploading(false);
     }

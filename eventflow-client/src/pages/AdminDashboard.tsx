@@ -52,9 +52,9 @@ const AdminDashboard = () => {
       await adminAPI.approveOrganizer(userId);
       setOrganizers(organizers.filter(org => org.id !== userId));
       alert('Organizer approved successfully!');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error approving organizer:', err);
-      alert('Failed to approve organizer');
+      alert(err.response?.data?.message || 'Failed to approve organizer');
     }
   };
 
@@ -64,9 +64,9 @@ const AdminDashboard = () => {
       await adminAPI.rejectOrganizer(userId);
       setOrganizers(organizers.filter(org => org.id !== userId));
       alert('Organizer rejected and removed.');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error rejecting organizer:', err);
-      alert('Failed to reject organizer');
+      alert(err.response?.data?.message || 'Failed to reject organizer');
     }
   };
 
@@ -75,9 +75,9 @@ const AdminDashboard = () => {
       await adminAPI.approveEvent(eventId);
       setPendingEvents(pendingEvents.filter(ev => ev.id !== eventId));
       alert('Event approved successfully!');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error approving event:', err);
-      alert('Failed to approve event');
+      alert(err.response?.data?.message || 'Failed to approve event');
     }
   };
 
@@ -88,9 +88,9 @@ const AdminDashboard = () => {
       await adminAPI.rejectEvent(eventId, reason);
       setPendingEvents(pendingEvents.filter(ev => ev.id !== eventId));
       alert('Event rejected.');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error rejecting event:', err);
-      alert('Failed to reject event');
+      alert(err.response?.data?.message || 'Failed to reject event');
     }
   };
 

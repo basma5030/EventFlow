@@ -73,21 +73,32 @@ const CreateEvent = () => {
       const createdEvent = response.data;
       console.log('Event created with ID:', createdEvent.id);
       
-      // 2. رفع الصورة
-      const formDataWithImage = new FormData();
-      formDataWithImage.append('image', imageFile);
-      await eventsAPI.uploadImage(createdEvent.id, formDataWithImage);
-      console.log('✅ Image uploaded successfully');
-      
-      // 3. رفع المواد
-      if (materials.length > 0) {
-        console.log(`📦 Uploading ${materials.length} material(s)...`);
-        for (const file of materials) {
-          const materialFormData = new FormData();
-          materialFormData.append('attachment', file);
-          await eventsAPI.uploadMaterial(createdEvent.id, materialFormData);
-          console.log(`✅ Uploaded: ${file.name}`);
+      try {
+        // 2. رفع الصورة
+        const formDataWithImage = new FormData();
+        formDataWithImage.append('image', imageFile);
+        await eventsAPI.uploadImage(createdEvent.id, formDataWithImage);
+        console.log('✅ Image uploaded successfully');
+        
+        // 3. رفع المواد
+        if (materials.length > 0) {
+          console.log(`📦 Uploading ${materials.length} material(s)...`);
+          for (const file of materials) {
+            const materialFormData = new FormData();
+            materialFormData.append('attachment', file);
+            await eventsAPI.uploadMaterial(createdEvent.id, materialFormData);
+            console.log(`✅ Uploaded: ${file.name}`);
+          }
         }
+      } catch (uploadErr) {
+        console.error('Upload failed, rolling back event creation...');
+        try {
+          await eventsAPI.delete(createdEvent.id);
+          console.log('Rollback successful');
+        } catch (rollbackErr) {
+          console.error('Failed to rollback event:', rollbackErr);
+        }
+        throw uploadErr; // Rethrow to show the error message in the outer catch block
       }
       
       alert('Event submitted for Admin Approval!');
