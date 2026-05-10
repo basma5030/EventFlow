@@ -25,7 +25,7 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login(LoginDto dto)
     {
         var token = await _auth.LoginAsync(dto);
-        return Ok( new{token});
+        return Ok(new { token });
     }
     
     [HttpGet("profile")]

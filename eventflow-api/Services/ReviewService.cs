@@ -1,32 +1,40 @@
 ﻿using Eventflow.Data;
 using Eventflow.DTOs;
+using Eventflow.Exceptions;
 using Eventflow.Models;
 using Microsoft.EntityFrameworkCore;
 
 public class ReviewService
 {
-    private readonly AppDbContext _db;
+  private readonly IRepository<Review, int> _revRepo;
+  private readonly AppDbContext _db; // only for complex queries
+  private readonly IRepository<Events, int> _eventRepo;
 
-    public ReviewService(AppDbContext db)
+    public ReviewService(IRepository<Review, int> repo, 
+    IRepository<Events, int> eventRepo,
+     AppDbContext db)
     {
+        _revRepo = repo;
         _db = db;
+        _eventRepo = eventRepo;
     }
+
 
     public async Task<ReviewDto> AddReviewAsync(
         int eventId,
         int userId,
         ReviewDto dto)
     {
-        var ev = await _db.Events.FindAsync(eventId);
+       var ev = await _eventRepo.GetByIdAsync(eventId); //uses generic 
 
         if (ev == null)
-            throw new Exception("Event not found");
+            throw new NotFoundException("Event not found");
 
         var exists = await _db.Reviews
             .AnyAsync(r => r.UserId == userId && r.EventId == eventId);
 
         if (exists)
-            throw new Exception("You already reviewed this event");
+            throw new ValidationException("You already reviewed this event");
 
         var review = new Review
         {
@@ -36,16 +44,16 @@ public class ReviewService
             Comment = dto.Comment,
             CreatedAt = DateTime.UtcNow
         };
-
-        _db.Reviews.Add(review);
-
-        await _db.SaveChangesAsync();
-
+        
+        // uses repo
+        await _revRepo.AddAsync(review); 
+        await _revRepo.SaveChangesAsync();
         return MapReviewToDto(review);
     }
 
     public async Task<List<ReviewDto>> GetEventReviewsAsync(int eventId)
     {
+        //complex query, cannot implement generic obv.
         return await _db.Reviews
             .Where(r => r.EventId == eventId)
             .OrderByDescending(r => r.CreatedAt)

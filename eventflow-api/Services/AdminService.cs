@@ -1,5 +1,6 @@
 using Eventflow.Data;
 using Eventflow.DTOs;
+using Eventflow.Exceptions;
 using Eventflow.Models;
 using Eventflow.Models.Enums;
 using Microsoft.AspNetCore.SignalR;
@@ -39,10 +40,10 @@ public class AdminService
         var user = await _db.Users
         .FirstOrDefaultAsync(u => u.Id == userId 
         && u.Role == UserRole.Organizer)
-        ?? throw new Exception("Organizer not found");
+        ?? throw new NotFoundException("Organizer not found");
 
         if (user.IsApproved)
-        throw new Exception(
+        throw new ValidationException(
          "Organizer is already approved.");
 
         user.IsApproved = true;
@@ -59,8 +60,12 @@ public class AdminService
         var user = await _db.Users
         .FirstOrDefaultAsync(u => u.Id == userId 
         && u.Role == UserRole.Organizer)
-         ?? throw new Exception("Organizer not found");
+         ?? throw new NotFoundException("Organizer not found");
 
+        if(user.IsApproved)
+        {
+            throw new ForbiddenException("Cannot reject an already approved organizer.");
+        }
         _db.Users.Remove(user);
         await _db.SaveChangesAsync();
     }
@@ -84,7 +89,7 @@ public class AdminService
         .Include(e => e.Organizer)
         .FirstOrDefaultAsync(e => e.id == eventId 
         && e.status == EventStatus.pending)
-            ?? throw new Exception("Pending event not found");
+            ?? throw new NotFoundException("Pending event not found");
 
         ev.status = EventStatus.approved;
         await _db.SaveChangesAsync();
@@ -96,7 +101,7 @@ public class AdminService
         .Include(e => e.Organizer)
         .FirstOrDefaultAsync(e => e.id == eventId 
         && e.status == EventStatus.pending)
-        ?? throw new Exception("Pending event not found");
+        ?? throw new NotFoundException("Pending event not found");
 
         ev.status = EventStatus.rejected;
         ev.rejectionReason = reason;

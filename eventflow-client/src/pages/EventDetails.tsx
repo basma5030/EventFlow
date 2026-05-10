@@ -113,9 +113,9 @@ const EventDetails = () => {
       await eventsAPI.deleteMaterial(Number(id), materialId);
       setMaterials(materials.filter(m => m.id !== materialId));
       alert('Material deleted successfully');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error deleting material:', err);
-      alert('Failed to delete material');
+      alert(err.response?.data?.message || 'Failed to delete material');
     }
   };
 

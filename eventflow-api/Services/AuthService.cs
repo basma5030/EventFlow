@@ -1,8 +1,10 @@
 using Eventflow.Data;
+using Eventflow.Exceptions;
 using Eventflow.Models;
 using Eventflow.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Eventflow.Exceptions;
 namespace Eventflow.DTOs;
 public class AuthService
 {
@@ -17,7 +19,7 @@ public class AuthService
    public async Task<UserDto> RegisterAsync(RegisterDto dto)
     {
         if (await _db.Users.AnyAsync(u => u.Email == dto.email))
-            throw new Exception("Email already in use");
+            throw new ValidationException("Email already in use");
         var user = new User
         {
             Name = dto.username,
@@ -36,22 +38,22 @@ public class AuthService
     {
         var user = await _db.Users
         .FirstOrDefaultAsync(u => u.Email == dto.email)
-        ?? throw new Exception("Invalid credentials.");
+        ?? throw new ValidationException("Invalid credentials.");
 
         if(!BCrypt.Net.BCrypt.Verify
         (dto.password, user.PasswordHash))
-        throw new Exception("Invalid credentials.");
+        throw new ValidationException("Invalid credentials.");
 
         if(user.Role == UserRole.Organizer &&
         !user.IsApproved)
-            throw new Exception("Your account is pending admin approval");
+            throw new ValidationException("Your account is pending admin approval");
 
         return _jwt.GenerateToken(user);
     }
     public async Task<UserDto> getCurrentUserAsync(int userId)
     {
         var user = await _db.Users.FindAsync(userId)
-        ?? throw new Exception("User not found :<");
+        ?? throw new NotFoundException("User not found :<");
      return MapToDto(user);
     }
 
