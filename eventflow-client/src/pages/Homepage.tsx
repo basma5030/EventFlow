@@ -42,14 +42,12 @@ const Homepage = () => {
       
       const params: any = {};
       
-      // البحث من الـ Search Box العلوي - بنبحث في كل الحقول الممكنة
+      // Search from top search box - search in all possible fields
       if (searchTerm && searchTerm.trim()) {
-        params.venue = searchTerm;
-        params.category = searchTerm;
-        params.title = searchTerm;  // ✅ بنضيف title عشان يبحث في العنوان برضه
+        params.searchTerm = searchTerm;
       }
       
-      // الفلاتر المتقدمة
+      // Advanced filters
       if (searchVenue && searchVenue.trim()) params.venue = searchVenue;
       if (searchCategory && searchCategory.trim()) params.category = searchCategory;
       if (searchDate) params.date = searchDate;
@@ -146,7 +144,7 @@ const Homepage = () => {
         <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto w-full relative z-10">
           <Link to="/" className="flex items-center gap-2">
             <span className="text-3xl">📅</span>
-            <h1 className="text-2xl font-black tracking-tighter uppercase">EventFlow</h1>
+            <h1 className="text-2xl font-black tracking-tighter uppercase">Event-Flow</h1>
           </Link>
 
           <div className="flex items-center gap-5">
@@ -251,7 +249,8 @@ const Homepage = () => {
         {/* HERO SECTION */}
         <div className="text-center mt-12 px-4 relative z-0">
           <h2 className="text-6xl font-black mb-4 tracking-tighter uppercase italic">Discover Events</h2>
-          <p className="text-lg opacity-70 mb-10 text-blue-100 font-medium">Experience the best events happening now</p>
+          <p className="text-lg opacity-90 mb-10 text-blue-100 font-medium hover:text-green-300 transition-colors duration-300">
+            Experience the best events happening now</p>
           
           {/* Search Bar */}
           <div className="max-w-3xl mx-auto bg-white rounded-3xl shadow-2xl p-2 flex items-center border-8 border-white/10">
@@ -324,7 +323,7 @@ const Homepage = () => {
 
       {/* MAIN CONTENT */}
       <main className="max-w-7xl mx-auto px-6 py-12 -mt-16 w-full flex-grow relative z-20">
-        <div className="flex items-center justify-between mb-10">
+        <div className="flex items-center justify-between mb-10 mt-10">
           <h3 className="text-2xl font-black text-gray-900 uppercase tracking-tighter border-l-8 border-[#1e4e8c] pl-4">
             {events.length} Events Available
           </h3>

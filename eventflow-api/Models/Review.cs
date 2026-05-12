@@ -10,7 +10,7 @@ namespace Eventflow.Models
         public string Comment { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
 
-        // Navigation properties
+        // Navigation properties, many reviews per event and user
         public User User { get; set; } = null!;
         public Events Event { get; set; } = null!;
     }

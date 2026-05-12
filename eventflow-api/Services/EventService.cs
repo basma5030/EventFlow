@@ -21,7 +21,7 @@ public class EventService
         _env = env;
         _hub = hub;
     }
-
+    //org creates event, goes for admin approval, at approval it becomes visible and allows other functionalities.
     public async Task<EventDto> CreateEventAsync(int organizerId, CreateEventDto dto)
     {
         var organizer = await _db.Users.FindAsync(organizerId)
@@ -58,6 +58,7 @@ public class EventService
             .FirstOrDefaultAsync(e => e.id == eventId && e.organizerId == organizerId)
             ?? throw new NotFoundException("Event not found or access denied.");
 
+        //update with new dto values, old values kept for comparison and notification.
         var oldTitle = ev.title;
         var oldDate = ev.eventDate;
         var oldVenue = ev.venue;
@@ -71,6 +72,8 @@ public class EventService
         ev.eventDate = updated.eventDate;
         ev.ticketPrice = updated.ticketPrice;
 
+        //validation for total tickets, cannot be less than already sold tickets.
+        //i.e law 100 tickets were there and 30 sold, total cannot be updated to less than 30.
         var ticketsSold = ev.totalTickets - ev.availableTickets;
         if (updated.totalTickets >= ticketsSold)
         {
@@ -104,6 +107,7 @@ public class EventService
         if (changes.Count > 0)
         {
             var message = $"✏️ Event '{ev.title}' was updated:\n- {string.Join("\n- ", changes)}";
+            //notify changes to attendees
             await NotifyAttendees(eventId, message);
         }
 
@@ -132,6 +136,7 @@ public class EventService
         return MapToDto(ev);
     }
 
+    //get materials for an event, like ppt, pdf, docs etc.
     public async Task<EventWithMaterialsDto?> GetEventWithMaterialsAsync(int id)
     {
         var ev = await _db.Events
@@ -156,7 +161,7 @@ public class EventService
             }).ToList()
         };
     }
-
+    //get approved events for public view.
     public async Task<List<EventDto>> GetApprovedEventsAsync()
     {
         return await _db.Events
@@ -165,7 +170,7 @@ public class EventService
             .Select(e => MapToDto(e))
             .ToListAsync();
     }
-
+    //get events of an organizer, for management in dashboard.
     public async Task<List<EventDto>> getOrganizerEventsAsync(int organizerId)
     {
         return await _db.Events
@@ -176,11 +181,26 @@ public class EventService
             .ToListAsync();
     }
 
-    public async Task<List<EventDto>> SearchEventsAsync(string? venue, string? category, DateTime? date)
+    //search events with multiple optional filters, for public search.
+    public async Task<List<EventDto>> SearchEventsAsync(string? venue, string? category,
+     DateTime? date, string? title,string? searchTerm)
     {
         var query = _db.Events
             .Where(e => e.status == EventStatus.approved)
             .AsQueryable();
+
+        // General search (OR logic)
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+        var term = searchTerm.ToLower().Trim();
+           query = query.Where(e => e.title.ToLower().Contains(term) 
+                           || e.venue.ToLower().Contains(term) 
+                           || e.category.ToLower().Contains(term));
+        }
+
+        //filters with AND logic
+        if (!string.IsNullOrEmpty(title))
+            query = query.Where(e => e.title.Contains(title));
 
         if (!string.IsNullOrEmpty(venue))
             query = query.Where(e => e.venue.Contains(venue));
@@ -196,7 +216,8 @@ public class EventService
             .Select(e => MapToDto(e))
             .ToListAsync();
     }
-
+    //files vs material files are for event image and single attachment,
+    // material is for multiple attachments with details stored in db and can be managed.
     public async Task<EventDto> UploadEventFilesAsync(int organizerId, int eventId, IFormFile image, IFormFile attachment)
     {
         var ev = await _db.Events
@@ -210,7 +231,7 @@ public class EventService
         await _db.SaveChangesAsync();
         return MapToDto(ev);
     }
-
+    //upload material file for an event, can be ppt, pdf, docs etc. with details stored in db.
     public async Task<EventMaterial> UploadSingleMaterialAsync(int organizerId, int eventId, IFormFile file)
     {
         var ev = await _db.Events
@@ -248,7 +269,8 @@ public class EventService
         
         if (material.Event.organizerId != organizerId)
             throw new ForbiddenException("You don't have permission to delete this material");
-        
+
+        //delete file from storage
         var filePath = Path.Combine(_env.WebRootPath, material.FilePath.TrimStart('/'));
         if (File.Exists(filePath))
             File.Delete(filePath);
@@ -256,7 +278,7 @@ public class EventService
         _db.EventMaterials.Remove(material);
         await _db.SaveChangesAsync();
     }
-
+    //notify attendees of changes or updates to the event, like event update, new material etc.
     private async Task NotifyAttendees(int eventId, string message)
     {
         var attendees = await _db.Tickets

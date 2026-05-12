@@ -21,6 +21,7 @@ namespace Eventflow.Models
         public DateTime createdAt { get; set; }
 
         // Navigation properties
+        // 1 org can have many events, but the rest are many per event
         public User Organizer { get; set; } = null!;
         public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
         public ICollection<Review> Reviews { get; set; } = new List<Review>();

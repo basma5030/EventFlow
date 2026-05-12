@@ -7,7 +7,7 @@ namespace Eventflow.Models
         public int EventId { get; set; }
         public DateTime savedAt { get; set; }
 
-        // Navigation properties
+        // Navigation properties, many watchlist entries per event and user
         public User User { get; set; } = null!;
         public Events Event { get; set; } = null!;
     }

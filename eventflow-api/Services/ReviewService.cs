@@ -4,6 +4,7 @@ using Eventflow.Exceptions;
 using Eventflow.Models;
 using Microsoft.EntityFrameworkCore;
 
+//we use generic repo for simple CRUD, but use dbcontext for complex queries
 public class ReviewService
 {
   private readonly IRepository<Review, int> _revRepo;

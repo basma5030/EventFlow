@@ -60,6 +60,8 @@ public class TicketService
             }
 
             // Atomic update to prevent race conditions
+            //meaning, law 2 users buy the last ticket at the same time, only 1 will succeed,
+            //  the other will get sold out message instead of both succeeding and going negative.
             var rowsAffected = await _db.Events
                 .Where(e => e.id == eventId && e.availableTickets > 0 && e.status == EventStatus.approved)
                 .ExecuteUpdateAsync(s => s.SetProperty(e => e.availableTickets, e => e.availableTickets - 1));
@@ -71,11 +73,12 @@ public class TicketService
             }
 
             // Sync the in-memory entity so DTO mapping works correctly
+            //meaning, at successful purchase, the available tickets will be updated.
             ev.availableTickets--;
             
             var uniqueCode = Guid.NewGuid().ToString();
             var qrBase64 = _qr.GenerateQrCode(uniqueCode);
-            
+            //for debugging
             Console.WriteLine($"QR Code generated: {uniqueCode.Substring(0, 8)}...");
             
             var ticket = new Ticket
@@ -106,7 +109,7 @@ public class TicketService
             
             Console.WriteLine("SUCCESS: Ticket purchased!");
             
-            // SignalR - using User instead of Group
+            // SignalR here to notify user and update event watchers about ticket count change
             try
             {
                 await _hub.Clients.User(userId.ToString()).SendAsync("ReceiveNotification", new
@@ -117,8 +120,9 @@ public class TicketService
                     CreatedAt = DateTime.UtcNow,
                     IsRead = false
                 });
-                Console.WriteLine($"Notification sent to user {userId} via SignalR");
+                Console.WriteLine($"Notification sent to user {userId}");
             }
+            //hub broadcast failure != unsuccessful purchase, so no rollback.
             catch (Exception hubEx)
             {
                 Console.WriteLine($"Hub broadcast error (non-critical): {hubEx.Message}");
@@ -127,6 +131,8 @@ public class TicketService
             // broadcast no. tickets to event watchers
             try
             {
+                //frontend subscribes to event group for ticket count updates
+                //so only those watching the event get the update, not all users.
                 await _hub.Clients.Group($"event-{eventId}").SendAsync("TicketCountUpdated", new
                 {
                     eventId = ev.id,
@@ -141,6 +147,7 @@ public class TicketService
             
             return await MapToDto(ticket, ev);
         }
+        //roll back for any other failure.
         catch (Exception ex)
         {
             Console.WriteLine($"ERROR: {ex.Message}");
@@ -150,6 +157,7 @@ public class TicketService
         }
     }
     
+    //get all tickets for a user, with event details included.
     public async Task<List<TicketDto>> getMyTicketsAsync(int userId)
     {
         var tickets = await _db.Tickets
@@ -166,6 +174,7 @@ public class TicketService
         return result;
     }
 
+    //get a specific ticket for a user
     public async Task<TicketDto> getTicketByIdAsync(int userId, int ticketId)
     {
         var ticket = await _db.Tickets

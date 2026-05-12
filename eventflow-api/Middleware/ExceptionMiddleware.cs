@@ -36,7 +36,7 @@ public class ExceptionMiddleware
         {
             NotFoundException    => (404, ex.Message),
             ForbiddenException   => (403, ex.Message),
-            ValidationException  => (400, ex.Message),
+            ValidationException  => (400, ex.Message), //ie bad request code
             UnauthorizedAccessException => (401, "Unauthorized."),
             _                    => (500, _env.IsDevelopment() 
                                         ? ex.Message 

@@ -64,9 +64,12 @@ namespace Eventflow.Controllers
         public async Task<IActionResult> SearchEvents(
             [FromQuery] string? venue,
             [FromQuery] string? category,
-            [FromQuery] DateTime? date)
+            [FromQuery] DateTime? date,
+            [FromQuery] string? title,
+            [FromQuery] string? searchTerm)
         {
-            var data = await _service.SearchEventsAsync(venue, category, date);
+            var data = await _service.SearchEventsAsync(venue, category, date,
+             title, searchTerm);
             return Ok(data);
         }
 

@@ -12,7 +12,7 @@ namespace Eventflow.Models
         public DateTime CreatedAt { get; set; }
         public bool IsApproved { get; set; }
 
-        // Navigation properties
+        // Navigation properties 1 to m for all
         public ICollection<Events> Events { get; set; } = new List<Events>();
         public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
